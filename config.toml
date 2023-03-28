@@ -1,0 +1,23 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'okrust'
+theme = 'diary'
+#theme = 'tranquilpeak'
+
+
+[[menu.main]]
+url = "/categories"
+name = "Categories"
+weight = 3
+
+[[menu.main]]
+url = "/tags"
+name = "Tags"
+weight = 2
+
+[[menu.main]]
+url = "/posts"
+name = "Archive"
+weight = 1
+[params]
+favicon = "Your Favicon Address"
