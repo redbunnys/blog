@@ -40,5 +40,5 @@ jobs:
           chmod 600 private_key
           echo "${{ secrets.SERVER_IP }} ssh-rsa ${{ secrets.SSH_PUBLIC_KEY }}" >> ~/.ssh/known_hosts
 
-      - name: Deploy to Cloud Server
+      - name: Deploy to Cloud Server 
         run: rsync -avz -e "ssh -i private_key" --delete public/ root@${{ secrets.SERVER_IP }}:/var/www/hugo
