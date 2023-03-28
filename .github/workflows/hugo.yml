@@ -37,4 +37,4 @@ jobs:
         run: |
           echo $RSYNC_PWD > rsync.pwd
           sudo chmod 600 rsync.pwd
-          rsync -av --delete public/* myblog@:154.23.179.11:hublog --password-file=rsync.pwd
+          rsync -av --delete public/* myblog@154.23.179.11::hublog --password-file=rsync.pwd
