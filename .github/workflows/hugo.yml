@@ -32,7 +32,7 @@ jobs:
           cname: www.okrust.com # cname
           
       - name: Deploy to VPS
-        env:
+        env: 
           RSYNC_PWD: ${{ secrets.RSYNC_PASSWORD }}
         run: |
           echo $RSYNC_PWD > rsync.pwd
