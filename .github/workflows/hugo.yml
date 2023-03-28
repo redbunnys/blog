@@ -27,7 +27,7 @@ jobs:
       - name: Deploy Github
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # 这里不用动, 默认就好
+          github_token: ${{ secrets.GH_PAT }}  # 这里不用动, 默认就好
           publish_dir: ./public  # 注意是hugo的public文件夹
           cname: www.okrust.com # cname
 
