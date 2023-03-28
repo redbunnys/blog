@@ -32,7 +32,7 @@ jobs:
           cname: www.okrust.com # cname
 
       - name: Deploy  Cloud
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.1 
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:  
           username: 'root'   #ssh user name
           server: '${{ secrets.SERVER_IP }}' #引用之前创建好的secret
