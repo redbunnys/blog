@@ -3,7 +3,7 @@ name: github pages
 on:
   push:
     branches:
-      - master  # 这里是提交到master分支就立即触发job
+      - main  # 这里是提交到master分支就立即触发job
   pull_request:
 
 jobs:
