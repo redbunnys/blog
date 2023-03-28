@@ -31,11 +31,10 @@ jobs:
           publish_dir: ./public  # 注意是hugo的public文件夹
           cname: www.okrust.com # cname
           
-      - name: Deploy Tencent Cloud
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.1 
-        with:  
-          username: 'root'   #ssh user name
-          server: '${{ secrets.SERVER_IP }}' #引用之前创建好的secret
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} #引用之前创建好的secret
-          local_path: './public/*'  # 对应我们项目public的文件夹路径
-          remote_path: '/var/www/hugo' # 对应云上的目录
+      - name: Deploy to VPS
+        env:
+          RSYNC_PWD: ${{ secrets.RSYNC_PASSWORD }}
+        run: |
+          echo $RSYNC_PWD > rsync.pwd
+          sudo chmod 600 rsync.pwd
+          rsync -av --delete public/* myblog@:154.23.179.11:hublog --password-file=rsync.pwd
