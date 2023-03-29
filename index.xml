@@ -1,2 +1,226 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 28 Mar 2023 11:04:02 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello</title><link>https://www.okrust.com/posts/hello/</link><pubDate>Tue, 28 Mar 2023 11:04:02 +0800</pubDate><guid>https://www.okrust.com/posts/hello/</guid><description>okrust https://www.okrust.com/posts/hello/ -&lt;h1 id="hello-hugo">hello hugo&lt;/h1>
-- https://www.okrust.com/posts/hello/ -</description></item></channel></rss>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>okrust所有</copyright><lastBuildDate>Wed, 29 Mar 2023 11:07:16 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>国内镜像站</title><link>https://www.okrust.com/posts/mirrors/</link><pubDate>Wed, 29 Mar 2023 11:07:16 +0800</pubDate><guid>https://www.okrust.com/posts/mirrors/</guid><description>okrust https://www.okrust.com/posts/mirrors/ -&lt;h3 id="镜像源">镜像源&lt;/h3>
+&lt;p>&lt;a href="https://mirrors.tuna.tsinghua.edu.cn/">清华源&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.tuna.tsinghua.edu.cn/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://mirrors.huaweicloud.com/home">华为镜像源&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.huaweicloud.com/home
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://developer.aliyun.com/mirror/">阿里源&lt;/a>&lt;/p>
+&lt;pre tabindex="0">&lt;code>https://developer.aliyun.com/mirror/
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://mirrors.cloud.tencent.com/">腾讯源&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.cloud.tencent.com/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://mirrors.163.com/">163源&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.163.com/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="windows系统下载">Windows系统下载&lt;/h3>
+&lt;p>&lt;a href="https://msdn.itellyou.cn/">msdn老版&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://next.itellyou.cn/">msdn新版&lt;/a>&lt;/p>
+&lt;h3 id="npm源">Npm源&lt;/h3>
+&lt;p>&lt;a href="https://npmmirror.com/">阿里源&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>开源镜像: &lt;a href="https://npmmirror.com/mirrors/?spm=a2c6h.24755359.0.0.6d444dcc7N3fDO">https://npmmirror.com/mirrors/&lt;/a>&lt;/li>
+&lt;li>Node.js 镜像: &lt;a href="https://npmmirror.com/mirrors/node/">https://npmmirror.com/mirrors/node/&lt;/a>&lt;/li>
+&lt;li>alinode 镜像: &lt;a href="https://npmmirror.com/mirrors/alinode/">https://npmmirror.com/mirrors/alinode/&lt;/a>&lt;/li>
+&lt;li>ChromeDriver 镜像: &lt;a href="https://npmmirror.com/mirrors/chromedriver/">https://npmmirror.com/mirrors/chromedriver/&lt;/a>&lt;/li>
+&lt;li>OperaDriver 镜像: &lt;a href="https://npmmirror.com/mirrors/operadriver/">https://npmmirror.com/mirrors/operadriver/&lt;/a>&lt;/li>
+&lt;li>Selenium 镜像: &lt;a href="https://npmmirror.com/mirrors/selenium/?spm=a2c6h.24755359.0.0.6d444dcc7N3fDO">https://npmmirror.com/mirrors/selenium/&lt;/a>&lt;/li>
+&lt;li>electron 镜像: &lt;a href="https://npmmirror.com/mirrors/electron/">https://npmmirror.com/mirrors/electron/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>使用说明&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>你可以使用我们定制的 &lt;a href="https://github.com/cnpm/cnpm">cnpm&lt;/a> (gzip 压缩支持) 命令行工具代替默认的 &lt;code>npm&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ npm install -g cnpm --registry&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>https://registry.npmmirror.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>或者你直接通过添加 &lt;code>npm&lt;/code> 参数 &lt;code>alias&lt;/code> 一个新命令:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>alias &lt;span style="color:#79c0ff">cnpm&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>&lt;span style="color:#a5d6ff">&amp;#34;npm --registry=https://registry.npmmirror.com \
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">--cache=&lt;/span>&lt;span style="color:#79c0ff">$HOME&lt;/span>&lt;span style="color:#a5d6ff">/.npm/.cache/cnpm \
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">--disturl=https://npmmirror.com/mirrors/node \
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">--userconfig=&lt;/span>&lt;span style="color:#79c0ff">$HOME&lt;/span>&lt;span style="color:#a5d6ff">/.cnpmrc&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># Or alias it in .bashrc or .zshrc&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ echo &lt;span style="color:#a5d6ff">&amp;#39;\n#alias for cnpm\nalias cnpm=&amp;#34;npm --registry=https://registry.npmmirror.com \
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff"> --cache=$HOME/.npm/.cache/cnpm \
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff"> --disturl=https://npmmirror.com/mirrors/node \
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff"> --userconfig=$HOME/.cnpmrc&amp;#34;&amp;#39;&lt;/span> &amp;gt;&amp;gt; ~/.zshrc &lt;span style="color:#ff7b72;font-weight:bold">&amp;amp;&amp;amp;&lt;/span> source ~/.zshrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>安装模块&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cnpm install &lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>name&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>更新模块&lt;/p>
+&lt;p>直接通过 &lt;code>sync&lt;/code> 命令马上同步一个模块, 只有 &lt;code>cnpm&lt;/code> 命令行才有此功能&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cnpm sync express
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然, 你可以直接通过 web 方式来同步: &lt;a href="https://npmmirror.com/sync/express">/sync/express&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> open https://npmmirror.com/sync/express
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>其他命令&lt;/p>
+&lt;p>支持 &lt;code>npm&lt;/code> 除了 &lt;code>publish&lt;/code> 之外的所有命令, 如:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> cnpm info express
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>官网有更详细的教程使用&lt;/p>
+&lt;/blockquote>
+&lt;hr>
+&lt;h3 id="pip源">Pip源&lt;/h3>
+&lt;p>清华大学：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>https://pypi.tuna.tsinghua.edu.cn/simple
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>阿里云：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>http://mirrors.aliyun.com/pypi/simple/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>腾讯云：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>https://mirrors.cloud.tencent.com/pypi/simple/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>中国科技大学：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>https://mirrors.cloud.tencent.com/pypi/simple/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>豆瓣：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>https://pypi.doubanio.com/simple/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>浙江大学：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>https://mirrors.zju.edu.cn/pypi/web/simple/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>使用教程&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>临时使用&lt;/p>
+&lt;p>在pip后面加上参数 &lt;code>-i&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>pip install scrapy -i https://mirrors.aliyun.com/pypi/simple
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>永久使用&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Linux&lt;/p>
+&lt;p>修改&lt;code> ~/.pip/pip.conf&lt;/code> (没有就创建一个)， 内容如下:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>global&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>index-url &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> https://mirrors.aliyun.com/pypi/simple
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Windows&lt;/p>
+&lt;p>直接在user目录中创建一个pip目录，如：C:\Users\xx\pip，新建文件pip.ini，内容如下,或者 win+R ，输入&lt;code>%homepath%&lt;/code>下面新建 pip文件夹，进入pip文件夹新建 pip.ini&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>global&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>index-url &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> https://mirrors.aliyun.com/pypi/simple
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>其他&lt;/p>
+&lt;p>报错：如果报错 &amp;ldquo;The repository located at mirrors.aliyun.com is not a trusted … &amp;ldquo;的情况&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>一次性解决：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>pip install scrapy -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>永久解决：在pip.conf下添加：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>global&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trusted-host&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>mirrors.aliyun.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="golang源">GoLang源&lt;/h3>
+&lt;ul>
+&lt;li>七牛：Goproxy 中国 &lt;a href="https://goproxy.cn">https://goproxy.cn&lt;/a>&lt;/li>
+&lt;li>阿里： &lt;a href="https://mirrors.aliyun.com/goproxy/">https://mirrors.aliyun.com/goproxy/&lt;/a>&lt;/li>
+&lt;li>官方： 全球CDN加速 &lt;a href="https://goproxy.io/">https://goproxy.io/&lt;/a>&lt;/li>
+&lt;li>其他：jfrog 维护 &lt;a href="https://gocenter.io">https://gocenter.io&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>设置代理&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>类 Unix(linux)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 启用 Go Modules 功能&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#79c0ff">GO111MODULE&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>on
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 配置 GOPROXY 环境变量，举一个栗子&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#79c0ff">GOPROXY&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>https://goproxy.cn,direct
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看是否完成设置完成&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go env | grep GOPROXY
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#显示成功&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">GOPROXY&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>&lt;span style="color:#a5d6ff">&amp;#34;https://goproxy.cn,direct&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Windows&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cmd" data-lang="cmd">&lt;span style="display:flex;">&lt;span># 启用 Go Modules 功能
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$env:GO111MODULE=&lt;span style="color:#a5d6ff">&amp;#34;on&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 配置 GOPROXY 环境变量，举一个栗子
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$env:GOPROXY=&lt;span style="color:#a5d6ff">&amp;#34;https://goproxy.cn,direct&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看是否完成设置完成&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cmd" data-lang="cmd">&lt;span style="display:flex;">&lt;span>go env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#找到这一行则可以了
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">set&lt;/span> &lt;span style="color:#79c0ff">GOPROXY&lt;/span>=https://goproxy.cn,direct
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="rust源">Rust源&lt;/h3>
+&lt;p>中国科学技术大学&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#git协议&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git://mirrors.ustc.edu.cn/crates.io-index
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#http&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>http://mirrors.ustc.edu.cn/crates.io-index
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上海交通大学&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>清华大学&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>rustcc社区&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://code.aliyun.com/rustcc/crates.io-index.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
+&lt;li>
+&lt;p>类 Unix(Linux)&lt;/p>
+&lt;p>创建 &lt;code>$HOME/.cargo/config&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>source.crates-io&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">registry&lt;/span> &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;https://github.com/rust-lang/crates.io-index&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 指定镜像&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>replace-with &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#39;镜像源名&amp;#39;&lt;/span> &lt;span style="color:#8b949e;font-style:italic"># 如：tuna、sjtu、ustc，或者 rustcc&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#replace-with = &amp;#39;tuna&amp;#39; &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 注：以下源配置一个即可，无需全部&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 中国科学技术大学&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>source.ustc&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">registry&lt;/span> &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;git://mirrors.ustc.edu.cn/crates.io-index&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 上海交通大学&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>source.sjtu&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">registry&lt;/span> &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 清华大学&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>source.tuna&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">registry&lt;/span> &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># rustcc社区&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>source.rustcc&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">registry&lt;/span> &lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;https://code.aliyun.com/rustcc/crates.io-index.git&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Windows&lt;/p>
+&lt;p>直接在user目录中创建一个pip目录，如：C:\Users\[用户名]\.cargo\config，内容如下,或者 win+R ，输入&lt;code>%homepath%&lt;/code>下面新建 .cargo文件夹，进入pip文件夹新建config&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-txt" data-lang="txt">&lt;span style="display:flex;">&lt;span>[registry]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>index = &amp;#34;https://mirrors.ustc.edu.cn/crates.io-index/&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[source.crates-io]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>replace-with = &amp;#39;ustc&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[source.ustc]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>registry = &amp;#34;https://mirrors.ustc.edu.cn/crates.io-index/&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="git加速源">Git加速源&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://hub.fastgit.org">https://hub.fastgit.org&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com.cnpmjs.org">https://github.com.cnpmjs.org&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://gitclone.com/">https://gitclone.com/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>使用教程&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#源git克隆&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/gin-gonic/gin.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#加速&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://gitclone/gin-gonic/gin.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="各个源版本大合集">各个源版本大合集&lt;/h3>
+&lt;p>这里只列出常用的几个&lt;/p>
+&lt;p>更多请点击 &lt;a href="https://mirrors.ustc.edu.cn/help/">USTC Mirror&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.ustc.edu.cn/help/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/mirrors/ - okrust所有</description></item><item><title>Hello</title><link>https://www.okrust.com/posts/hello/</link><pubDate>Tue, 28 Mar 2023 11:04:02 +0800</pubDate><guid>https://www.okrust.com/posts/hello/</guid><description>okrust https://www.okrust.com/posts/hello/ -&lt;h1 id="hello-hugo">hello hugo&lt;/h1>
+- https://www.okrust.com/posts/hello/ - okrust所有</description></item></channel></rss>
