@@ -7,7 +7,7 @@ comment : false
 hidden: false
 draft: false
 tags: ["linux"]
-Categories: ["www"]
+Categories: "www"
 ---
 
 ### 镜像源
