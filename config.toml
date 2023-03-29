@@ -1,9 +1,16 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
+baseURL = 'https://www.okrust.com/'
+languageCode = 'zh-CN'
 title = 'okrust'
 theme = 'diary'
-#theme = 'tranquilpeak'
+hasCJKLanguage = true
+paginate =  10
+paginatePath = "page"
 
+# 启用 Emoji; see emoji-cheat-sheet.com
+enableEmoji = false
+
+# 创建robots.txt，建议设置为true
+enableRobotsTXT = false
 
 [[menu.main]]
 url = "/categories"
