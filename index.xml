@@ -1,4 +1,27 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>okrust所有</copyright><lastBuildDate>Wed, 29 Mar 2023 15:05:16 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>hugo github Action 部署</title><link>https://www.okrust.com/posts/gitaction/</link><pubDate>Wed, 29 Mar 2023 15:05:16 +0800</pubDate><guid>https://www.okrust.com/posts/gitaction/</guid><description>okrust https://www.okrust.com/posts/gitaction/ -&lt;h1 id="github配置">Github配置&lt;/h1>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>okrust所有</copyright><lastBuildDate>Mon, 10 Apr 2023 16:09:04 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Openwrt主路由使用端口回流失效</title><link>https://www.okrust.com/posts/openwrt-nat/</link><pubDate>Mon, 10 Apr 2023 16:09:04 +0800</pubDate><guid>https://www.okrust.com/posts/openwrt-nat/</guid><description>okrust https://www.okrust.com/posts/openwrt-nat/ -&lt;h2 id="openwrt-解决方法">Openwrt 解决方法&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>ssh连接openwrt系统后，编辑/etc/sysctl.d/11-br-netfilter.conf文件。&lt;/p>
+&lt;p>&lt;code>net.bridge.bridge-nf-call-arptables=0&lt;/code>&lt;/p>
+&lt;p>&lt;code>net.bridge.bridge-nf-call-ip6tables=0&lt;/code>&lt;/p>
+&lt;p>&lt;code>net.bridge.bridge-nf-call-iptables=0&lt;/code>&lt;/p>
+&lt;p>保证为后面的赋值为 &lt;code>0&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>编辑&lt;code>/etc/sysctl.conf&lt;/code>文件。文件内容可能是空的，把第一条的内容复制进sysctl.conf文件，保存退出。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>ssh内输入&lt;code>sysctl -p&lt;/code>命令，结果输出为第一条的添加的字段&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>输入&lt;code>/etc/init.d/sysctl restart&lt;/code>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="方法来源">方法来源&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://www.kennylife.cn/index.php/x86_router/openwrt-NAT.html">http://www.kennylife.cn/index.php/x86_router/openwrt-NAT.html&lt;/a>&lt;/li>
+&lt;/ul>
+- https://www.okrust.com/posts/openwrt-nat/ - okrust所有</description></item><item><title>hugo github Action 部署</title><link>https://www.okrust.com/posts/gitaction/</link><pubDate>Wed, 29 Mar 2023 15:05:16 +0800</pubDate><guid>https://www.okrust.com/posts/gitaction/</guid><description>okrust https://www.okrust.com/posts/gitaction/ -&lt;h1 id="github配置">Github配置&lt;/h1>
 &lt;h2 id="进入自己的仓库">进入自己的仓库&lt;/h2>
 &lt;p>打开 setting -&amp;gt; Actions -&amp;gt; General, 找到 &lt;code>Workflow permissions&lt;/code>,选中 &lt;code>Read and write permissions&lt;/code>, 点击&lt;code>save&lt;/code>保存
 &lt;img src="https://www.okrust.com/2023-03-29_14-37.png" alt=" 步骤1">
@@ -295,5 +318,4 @@
 &lt;p>这里只列出常用的几个&lt;/p>
 &lt;p>更多请点击 &lt;a href="https://mirrors.ustc.edu.cn/help/">USTC Mirror&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.ustc.edu.cn/help/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/mirrors/ - okrust所有</description></item><item><title>Hello</title><link>https://www.okrust.com/posts/hello/</link><pubDate>Tue, 28 Mar 2023 11:04:02 +0800</pubDate><guid>https://www.okrust.com/posts/hello/</guid><description>okrust https://www.okrust.com/posts/hello/ -&lt;h1 id="hello-hugo">hello hugo&lt;/h1>
-- https://www.okrust.com/posts/hello/ - okrust所有</description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/mirrors/ - okrust所有</description></item></channel></rss>
