@@ -2,7 +2,7 @@
 title: "hugo github Action 部署"
 date: 2023-03-29T15:05:16+08:00
 description: "hugo静态一键部署到自己的vps上面"
-featured_image: "https://w.wallhaven.cc/full/j3/wallhaven-j3m8y5.png"
+featured_image: "wallhaven-e7jj6r.jpg"
 comment : false
 hidden: false
 draft: false
