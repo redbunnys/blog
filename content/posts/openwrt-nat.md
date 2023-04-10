@@ -2,7 +2,7 @@
 title: "Openwrt主路由使用端口回流失效"
 date: 2023-04-10T16:09:04+08:00
 description: "Openwrt 端口映射，公网访问正常，内网机器无法用公网访问内网机器"
-featured_image: "wallhaven-zyxvqy.jpg"
+featured_image: "https://w.wallhaven.cc/full/zy/wallhaven-zyxvqy.jpg"
 comment : false
 hidden: false
 draft: false

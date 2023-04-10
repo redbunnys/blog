@@ -2,7 +2,7 @@
 title: "国内镜像站"
 date: 2023-03-29T11:07:16+08:00
 description: "国内镜像站,系统安装包,npm,git,go,rust代理"
-featured_image: "wallhaven-j3m8y5.png"
+featured_image: "https://w.wallhaven.cc/full/j3/wallhaven-j3m8y5.png"
 comment : false
 hidden: false
 draft: false
