@@ -1,4 +1,208 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>okrust所有</copyright><lastBuildDate>Mon, 10 Apr 2023 16:09:04 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Openwrt主路由使用端口回流失效</title><link>https://www.okrust.com/posts/openwrt-nat/</link><pubDate>Mon, 10 Apr 2023 16:09:04 +0800</pubDate><guid>https://www.okrust.com/posts/openwrt-nat/</guid><description>okrust https://www.okrust.com/posts/openwrt-nat/ -&lt;h2 id="openwrt-解决方法">Openwrt 解决方法&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>okrust所有</copyright><lastBuildDate>Fri, 05 May 2023 16:33:24 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubenets in Action cli</title><link>https://www.okrust.com/posts/kubenets-in-action/</link><pubDate>Fri, 05 May 2023 16:33:24 +0800</pubDate><guid>https://www.okrust.com/posts/kubenets-in-action/</guid><description>okrust https://www.okrust.com/posts/kubenets-in-action/ -&lt;h1 id="常用指令">常用指令&lt;/h1>
+&lt;blockquote>
+&lt;p>学习中文档不全,慢慢整理&amp;hellip;..&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="2开始使用kubernets-和docker">2.开始使用kubernets 和docker&lt;/h2>
+&lt;h3 id="1-创建运行及共享容器镜像">1. 创建、运行及共享容器镜像&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker build -t kubia .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-运行第一个程序">3. 运行第一个程序&lt;/h3>
+&lt;h4 id="2访问第web-应用">2.访问第web 应用&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl expose rc kubia --type&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>LoadBalancer --name kubia-http
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>我们这里用的是replicationtroller的缩写rc。大 多数资源类型都有这样的缩写，所以不必输入全名（例如，pods的缩写是po,service的缩写是SVC，等等）列出服务&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get svc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>水平伸缩应用&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get replicationcontrollers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME DESIRED CURRENT READY AGE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubia &lt;span style="color:#a5d6ff">1&lt;/span> &lt;span style="color:#a5d6ff">1&lt;/span> &lt;span style="color:#a5d6ff">1&lt;/span> 32m
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>DESIRED 副本数量 ,CURRENT 希望运行的pod数量&lt;/p>
+&lt;/blockquote>
+&lt;p>增加副本数量&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl scale rc kubia --replicas&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>&lt;span style="color:#a5d6ff">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME DESIRED CURRENT READY AGE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubia &lt;span style="color:#a5d6ff">3&lt;/span> &lt;span style="color:#a5d6ff">3&lt;/span> &lt;span style="color:#a5d6ff">1&lt;/span> 34m
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如过有多个副本，则会均衡负载&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>root@master:/home/ubuntu/kubernetes-in-action-v1-notes/Chapter02# kubectl get po
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME READY STATUS RESTARTS AGE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubia-chlfj 1/1 Running &lt;span style="color:#a5d6ff">0&lt;/span> 2m19s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubia-lrql6 1/1 Running &lt;span style="color:#a5d6ff">0&lt;/span> 36m
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubia-qk7mv 1/1 Running &lt;span style="color:#a5d6ff">0&lt;/span> 2m19s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>root@master:/home/ubuntu/kubernetes-in-action-v1-notes/Chapter02# kubectl get service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME TYPE CLUSTER-IP EXTERNAL-IP PORT&lt;span style="color:#ff7b72;font-weight:bold">(&lt;/span>S&lt;span style="color:#ff7b72;font-weight:bold">)&lt;/span> AGE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubernetes ClusterIP 10.96.0.1 &amp;lt;none&amp;gt; 443/TCP 56m
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubia-http LoadBalancer 10.104.229.236 &amp;lt;pending&amp;gt; 8080:31338/TCP 11m
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>root@master:/home/ubuntu/kubernetes-in-action-v1-notes/Chapter02# curl 10.104.229.236:8080
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>You&lt;span style="color:#a5d6ff">&amp;#39;ve hit kubia-lrql6
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">root@master:/home/ubuntu/kubernetes-in-action-v1-notes/Chapter02# curl 10.104.229.236:8080
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">You&amp;#39;&lt;/span>ve hit kubia-qk7mv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>root@master:/home/ubuntu/kubernetes-in-action-v1-notes/Chapter02# curl 10.104.229.236:8080
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>You&lt;span style="color:#a5d6ff">&amp;#39;ve hit kubia-qk7mv
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">root@master:/home/ubuntu/kubernetes-in-action-v1-notes/Chapter02# curl 10.104.229.236:8080
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">You&amp;#39;&lt;/span>ve hit kubia-lrql6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>root@master:/home/ubuntu/kubernetes-in-action-v1-notes/Chapter02# curl 10.104.229.236:8080
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>You&lt;span style="color:#a5d6ff">&amp;#39;ve hit kubia-qk7mv
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">root@master:/home/ubuntu/kubernetes-in-action-v1-notes/Chapter02# curl 10.104.229.236:8080
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">You&amp;#39;&lt;/span>ve hit kubia-qk7mv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oot@master:/home/ubuntu/kubernetes-in-action-v1-notes/Chapter02# curl 10.104.229.236:8080
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>You&lt;span style="color:#f85149">&amp;#39;&lt;/span>ve hit kubia-chlfj
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>列出 pod 时显示 pod IP 和 pod 的节点&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get pods -o wide
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubia-chlfj 1/1 Running &lt;span style="color:#a5d6ff">0&lt;/span> 8m49s 10.40.0.2 node2 &amp;lt;none&amp;gt; &amp;lt;none&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubia-lrql6 1/1 Running &lt;span style="color:#a5d6ff">0&lt;/span> 42m 10.40.0.1 node2 &amp;lt;none&amp;gt; &amp;lt;none&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubia-qk7mv 1/1 Running &lt;span style="color:#a5d6ff">0&lt;/span> 8m49s 10.38.0.1 node1 &amp;lt;none&amp;gt; &amp;lt;none&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看pod详细信息&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl describe pod kubia-chlfj
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name: kubia-chlfj
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Namespace: default
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Priority: &lt;span style="color:#a5d6ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Node: node2/192.168.0.201
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Start Time: Fri, &lt;span style="color:#a5d6ff">05&lt;/span> May &lt;span style="color:#a5d6ff">2023&lt;/span> 09:04:47 +0000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Labels: &lt;span style="color:#79c0ff">run&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>kubia
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Annotations: &amp;lt;none&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Status: Running
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>IP: 10.40.0.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>IPs:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IP: 10.40.0.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Controlled By: ReplicationController/kubia
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>访问GKE集群dashbord&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl cluster-info | grep dashboard
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>如果你正在使 用 Google Kubemetes Engine&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="3运行于kuberntes-中的容器">3.运行于Kuberntes 中的容器&lt;/h2>
+&lt;h2 id="32-以yaml或者json文件创建pod">3.2 以YAML或者JSON文件创建pod&lt;/h2>
+&lt;h4 id="321-检查现有的yaml描述">3.2.1 检查现有的yaml描述&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po kubia-zxzij -o yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://www.okrust.com/kubernet-in-action/2023-03-29_14-37.png" alt="yaml">
+&lt;img src="https://www.okrust.com/kubernet-in-action/2023-05-05_17-41.png" alt="yaml">&lt;/p>
+&lt;ul>
+&lt;li>metadata包括名称、命名空间、标 签和关于该容器 的其他信息。&lt;/li>
+&lt;li>spec包含p od内容的实际说明，例如p od的容器、卷和其他数据。&lt;/li>
+&lt;li>status包含运行中的pod的当前信息，例如po d所处的条件、每个容器的描述和状态，以及内部IP和其他基本信息&lt;/li>
+&lt;/ul>
+&lt;p>使用 kubectl explain 来发现可能的 API 对象字段&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#在准备 manifest 时，可以转到 http: //kubemetes.io / docs /api 上的 Kubemetes参考文档查看每个 API 对象支持哪些属性，也可以使用 kubectl explain 命令 。例如，当从头创建一个 pod manifest 时，可以从请求 kubectl 来解释 pod 开始：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl explain pods
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl explain pod.spec
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="323-kubectl-create-创建pod">3.2.3 kubectl create 创建pod&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl create -f kubia-manual.yam
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>得到pod完整定义&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po kubia-manual -o yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get po kubia-manual -o json
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看新建的pod&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get pods
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="324-查看应用程序日志">3.2.4 查看应用程序日志&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl logs kubia-manual
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果包含多个pod 的日志时指定容器名称&lt;/p>
+&lt;p>如果我们的pod包含多个容器， 在运行kubectl logs命令时则必须通过包含-c &amp;lt;容器名称＞选项来显式指定容器名称。 在kubia-manual pod中， 我们将容器的名称设置为kubia, 所以如果该pod中有其他容器， 可以通过如下命令获取其日志&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl logs kubia-manual -c kubia
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="325-向pod发送请求">3.2.5 向pod发送请求&lt;/h4>
+&lt;p>将本地网络端口转发到 pod 中的端口&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl port-forward kubia-manual 8888:8080
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/kubenets-in-action/ - okrust所有</description></item><item><title>kubernets 部署</title><link>https://www.okrust.com/posts/kubernets/</link><pubDate>Fri, 05 May 2023 01:12:16 +0800</pubDate><guid>https://www.okrust.com/posts/kubernets/</guid><description>okrust https://www.okrust.com/posts/kubernets/ -&lt;h1 id="kubernets-部署">Kubernets 部署&lt;/h1>
+&lt;blockquote>
+&lt;p>踩坑更新中&lt;/p>
+&lt;p>参考教程：&lt;a href="https://k8s.easydoc.net/docs/dRiQjyTY/28366845/6GiNOzyZ/nd7yOvdY">链接&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="docker安装">Docker安装&lt;/h2>
+&lt;h3 id="一键脚本">一键脚本&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -fsSL https://get.docker.com -o get-docker.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo sh get-docker.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Executing docker install script, commit: 7cae5f8b0decc17d6571f9f52eb840fbc13b2737
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;...&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>&lt;a href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="修改docker-driver方式">修改docker driver方式&lt;/h3>
+&lt;p>查看&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo docker info | grep &lt;span style="color:#a5d6ff">&amp;#34;Cgroup Driver
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果不是 &lt;code>Cgroup Driver: systemd&lt;/code>,则使用下面的配置文件更改&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vim /etc/docker/daemon.json
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#内容如下所示：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a5d6ff">&amp;#34;exec-opts&amp;#34;&lt;/span>: &lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>&lt;span style="color:#a5d6ff">&amp;#34;native.cgroupdriver=systemd&amp;#34;&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://developer.aliyun.com/article/981452">相关文章&lt;/a>&lt;/p>
+&lt;h2 id="镜像源获取">镜像源获取&lt;/h2>
+&lt;p>&lt;a href="https://developer.aliyun.com/mirror/kubernetes">阿里云kubernets&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get update &lt;span style="color:#ff7b72;font-weight:bold">&amp;amp;&amp;amp;&lt;/span> apt-get install -y apt-transport-https
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cat &lt;span style="color:#a5d6ff">&amp;lt;&amp;lt;EOF &amp;gt;/etc/apt/sources.list.d/kubernetes.list
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install -y kubelet kubeadm kubectl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt install -y &lt;span style="color:#79c0ff">kubelet&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>1.23.9-00 &lt;span style="color:#79c0ff">kubectl&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>1.23.9-00 &lt;span style="color:#79c0ff">kubeadm&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>1.23.9-00
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#apt-mark hold kubelet=1.23.9-00 kubectl=1.23.9-00 kubeadm=1.23.9-00&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查询指定版本&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-cache madison kubect |grep 1.23
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="初始化">初始化&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 初始化集群控制台 Control plane&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 失败了可以用 kubeadm reset 重置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubeadm init --image-repository&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>registry.aliyuncs.com/google_containers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 记得把 kubeadm join xxx 保存起来&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 忘记了重新获取：kubeadm token create --print-join-command&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 复制授权文件，以便 kubectl 可以有权限访问集群&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 如果你其他节点需要访问集群，需要从主节点复制这个文件过去其他节点&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">###获取加入&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubeadm join 192.168.0.199:6443 --token qfczz9.dg5thnmt2ts3aobx --discovery-token-ca-cert-hash sha256:543bdc5b8d07628e4f83b5754c084956058510e8870867f462971604bb7a3859
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="常见错误">常见错误&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get pods
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#出现的错误 The connection to the server localhost:8080 was refused - did you specify the right host or port? &lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://stackoverflow.com/questions/45724889/the-connection-to-the-server-localhost8080-was-refused">相关文章&lt;/a>&lt;/p>
+&lt;p>解决方法&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo mkdir -p &lt;span style="color:#79c0ff">$HOME&lt;/span>/.kube
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo cp -i /etc/kubernetes/admin.conf &lt;span style="color:#79c0ff">$HOME&lt;/span>/.kube/config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown &lt;span style="color:#ff7b72">$(&lt;/span>id -u&lt;span style="color:#ff7b72">)&lt;/span>:&lt;span style="color:#ff7b72">$(&lt;/span>id -g&lt;span style="color:#ff7b72">)&lt;/span> &lt;span style="color:#79c0ff">$HOME&lt;/span>/.kube/config
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="安装网络同步插件">安装网络同步插件&lt;/h2>
+&lt;blockquote>
+&lt;p>主节点&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 很有可能国内网络访问不到这个资源，你可以网上找找国内的源安装 flannel&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 如果上面的插件安装失败，可以选用 Weave，下面的命令二选一就可以了。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#建议使用这个，这个安装成功&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f http://static.corecore.cn/weave.v2.8.1.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic"># 更多其他网路插件查看下面介绍，自行网上找 yaml 安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://blog.csdn.net/ChaITSimpleLove/article/details/117809007
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="报错的">报错的&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;a href="https://stackoverflow.com/questions/40534837/kubernetes-installation-and-kube-dns-open-run-flannel-subnet-env-no-such-file">kubernetes installation and kube-dns: open /run/flannel/subnet.env: no such file or directory&lt;/a>&lt;/p>
+&lt;p>使用其他的cni软件，不使用flannel&lt;/p>
+&lt;pre tabindex="0">&lt;code>rm -f /etc/cni/net.d/*flannel*
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;/ol>
+- https://www.okrust.com/posts/kubernets/ - okrust所有</description></item><item><title>Openwrt主路由使用端口回流失效</title><link>https://www.okrust.com/posts/openwrt-nat/</link><pubDate>Mon, 10 Apr 2023 16:09:04 +0800</pubDate><guid>https://www.okrust.com/posts/openwrt-nat/</guid><description>okrust https://www.okrust.com/posts/openwrt-nat/ -&lt;h2 id="openwrt-解决方法">Openwrt 解决方法&lt;/h2>
 &lt;ol>
 &lt;li>
 &lt;p>ssh连接openwrt系统后，编辑/etc/sysctl.d/11-br-netfilter.conf文件。&lt;/p>
