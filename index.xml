@@ -119,6 +119,85 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="325-向pod发送请求">3.2.5 向pod发送请求&lt;/h4>
 &lt;p>将本地网络端口转发到 pod 中的端口&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl port-forward kubia-manual 8888:8080
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="33-使用标签组织pod">3.3 使用标签组织pod&lt;/h3>
+&lt;h4 id="332-创建pod标签labels">3.3.2 创建pod标签labels&lt;/h4>
+&lt;p>创建pod&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl create -f kubia-manual-with-labels.yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看标签&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po --show-labels
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看指定的标签 labels,然后分组出来&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po -L creation_method,env
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://www.okrust.com/kubernet-in-action/3.3.2/2023-05-06_17-08.png" alt="img">&lt;/p>
+&lt;h4 id="333-修改添加pod-标签-labels">3.3.3 修改添加pod 标签 labels&lt;/h4>
+&lt;p>新增标签&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl label po kubia-manual &lt;span style="color:#79c0ff">creation_method&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>manual
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#pod/kubia-manual labeled&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>标签也可以在现有 pod 上进行添加和修改。 由于 pod kubia -manual 也是手动创建的， 所以为其添加 creation_method=manual 标签：&lt;/p>
+&lt;/blockquote>
+&lt;p>修改标签&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl label po kubia-manual-v2 &lt;span style="color:#79c0ff">env&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>debug --overwrite
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>修改现有的标签需要添加 &amp;ndash;overwrite&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://www.okrust.com/kubernet-in-action/3.3.3/2023-05-06_17-20.png" alt="img">&lt;/p>
+&lt;h3 id="34-通过标签选择器列出pod子集">3.4 通过标签选择器列出pod子集&lt;/h3>
+&lt;h4 id="341-使用标签选择器列出pod">3.4.1 使用标签选择器列出pod&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po -L &lt;span style="color:#79c0ff">creation_method&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>manua
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查询不包括&lt;code>env&lt;/code>的pod&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po -l &lt;span style="color:#a5d6ff">&amp;#39;!env&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查询不包括&lt;code>env&lt;/code>的pod&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po -l &lt;span style="color:#a5d6ff">&amp;#39;env&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>加入 &amp;ndash;show-labels 显示lables信息&lt;/p>
+&lt;/blockquote>
+&lt;p>多种查询条件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po -l &lt;span style="color:#a5d6ff">&amp;#39;run=kubia&amp;#39;&lt;/span> --show-labels
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get po -l &lt;span style="color:#a5d6ff">&amp;#39;run!=kubia&amp;#39;&lt;/span> --show-labels
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://www.okrust.com/kubernet-in-action/3.4.1/2023-05-06_17-42.png" alt="img">&lt;/p>
+&lt;h4 id="342-在标签选择器中使用多个条件">3.4.2 在标签选择器中使用多个条件&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po -l &lt;span style="color:#a5d6ff">&amp;#39;creation_method=manual,method=manual&amp;#39;&lt;/span> --show-labels
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get po -l &lt;span style="color:#a5d6ff">&amp;#39;creation_method=manual,method!=manual&amp;#39;&lt;/span> --show-labels
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://www.okrust.com/kubernet-in-action/3.4.2/2023-05-06_17-45.png" alt="img">&lt;/p>
+&lt;h3 id="35-使用标签和选择器来约束pod调度">3.5 使用标签和选择器来约束pod调度&lt;/h3>
+&lt;h4 id="351-使用标签分类工作节点">3.5.1 使用标签分类工作节点&lt;/h4>
+&lt;p>假如node1 是SSD,node2 是hdd，某些环境需要ssd，可以通过labels 置顶调度到某个节点&lt;/p>
+&lt;p>假设我们集群中的 一个节点刚添加完成， 它包含一个用于通用GPU计算的GPU。 我们希望向节点添加标签来展示这个功能特性， 可以通过将 标签gpu=true添加到其中一个节点来实现（只需从kubectl get nodes返回的列表中选择一
+个）：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl label node node1 &lt;span style="color:#79c0ff">gpu&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://www.okrust.com/kubernet-in-action/3.5.1/2023-05-06_18-00.png" alt="img">&lt;/p>
+&lt;p>查询拥有gpu labels的node&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get node -l gpu
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="352-将pod调度到特定节点">3.5.2 将pod调度到特定节点&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apiVersion: v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kind: Pod
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metadata:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: kubia-gpu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spec:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> nodeSelector:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> gpu: &lt;span style="color:#a5d6ff">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#8b949e;font-style:italic">#node节点有gput=true的，则会调度到这个节点&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> containers:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - image: luksa/kubia
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: kubia
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="36-注解pod">3.6 注解pod&lt;/h3>
+&lt;h4 id="361-查找对象的注解">3.6.1 查找对象的注解&lt;/h4>
+&lt;p>&lt;img src="https://www.okrust.com/kubernet-in-action/3.6.1/2023-05-06_18-10.png" alt="img">&lt;/p>
+&lt;h4 id="362-添加和修改注解">3.6.2 添加和修改注解&lt;/h4>
+&lt;p>给 &lt;code>kubia-manual&lt;/code> pod添加注解&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl annotate pod kubia-manual mycompany.com/someannotation&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>&lt;span style="color:#a5d6ff">&amp;#34;foo bar&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看注解&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl describe pod kubia-manual
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#注解信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Annotations: mycompany.com/someannotation: foo bar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://www.okrust.com/kubernet-in-action/3.6.2/2023-05-06_18-15.png" alt="img">&lt;/p>
+&lt;h3 id="37-使用命名空间对资源进行分组">3.7 使用命名空间对资源进行分组&lt;/h3>
+&lt;h4 id="372-发现其他命名空间及其-pod">3.7.2 发现其他命名空间及其 pod&lt;/h4>
+&lt;p>查看所有命名空间&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get ns
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看指定的命名空间pod,&lt;code>kube-system&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get po --namespace kube-system
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/kubenets-in-action/ - okrust所有</description></item><item><title>kubernets 部署</title><link>https://www.okrust.com/posts/kubernets/</link><pubDate>Fri, 05 May 2023 01:12:16 +0800</pubDate><guid>https://www.okrust.com/posts/kubernets/</guid><description>okrust https://www.okrust.com/posts/kubernets/ -&lt;h1 id="kubernets-部署">Kubernets 部署&lt;/h1>
 &lt;blockquote>
 &lt;p>踩坑更新中&lt;/p>
