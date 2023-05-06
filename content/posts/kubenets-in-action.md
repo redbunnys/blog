@@ -197,3 +197,159 @@ kubectl logs kubia-manual -c kubia
 ~~~bash
 kubectl  port-forward kubia-manual 8888:8080
 ~~~
+
+### 3.3 使用标签组织pod
+
+#### 3.3.2 创建pod标签labels
+
+创建pod
+
+~~~bash
+kubectl create -f kubia-manual-with-labels.yaml
+~~~
+
+查看标签
+
+~~~bash
+kubectl get po --show-labels
+~~~
+
+查看指定的标签 labels,然后分组出来
+
+~~~bash
+kubectl get po -L creation_method,env
+~~~
+![img](/kubernet-in-action/3.3.2/2023-05-06_17-08.png)
+
+#### 3.3.3 修改添加pod 标签 labels
+
+新增标签
+
+~~~bash
+kubectl label po kubia-manual creation_method=manual
+#pod/kubia-manual labeled
+~~~
+
+> 标签也可以在现有 pod 上进行添加和修改。 由于 pod kubia -manual 也是手动创建的， 所以为其添加 creation_method=manual 标签：
+
+修改标签
+
+~~~bash
+kubectl label po kubia-manual-v2 env=debug --overwrite
+~~~
+>修改现有的标签需要添加 --overwrite
+
+![img](/kubernet-in-action/3.3.3/2023-05-06_17-20.png)
+
+### 3.4 通过标签选择器列出pod子集
+
+#### 3.4.1 使用标签选择器列出pod
+
+~~~bash
+kubectl get po -L creation_method=manua
+~~~
+
+查询不包括`env`的pod
+
+~~~bash
+kubectl get po -l '!env'
+~~~
+
+查询不包括`env`的pod
+
+~~~bash
+kubectl get po -l 'env'
+~~~
+> 加入 --show-labels 显示lables信息
+
+多种查询条件
+
+~~~bash
+kubectl get po -l 'run=kubia' --show-labels
+
+kubectl get po -l 'run!=kubia' --show-labels
+~~~
+![img](/kubernet-in-action/3.4.1/2023-05-06_17-42.png)
+
+#### 3.4.2 在标签选择器中使用多个条件
+
+~~~bash
+kubectl get po -l 'creation_method=manual,method=manual' --show-labels
+
+kubectl get po -l 'creation_method=manual,method!=manual' --show-labels
+~~~
+
+![img](/kubernet-in-action/3.4.2/2023-05-06_17-45.png)
+
+### 3.5 使用标签和选择器来约束pod调度
+
+#### 3.5.1 使用标签分类工作节点
+
+假如node1 是SSD,node2 是hdd，某些环境需要ssd，可以通过labels 置顶调度到某个节点
+
+假设我们集群中的 一个节点刚添加完成， 它包含一个用于通用GPU计算的GPU。 我们希望向节点添加标签来展示这个功能特性， 可以通过将 标签gpu=true添加到其中一个节点来实现（只需从kubectl get nodes返回的列表中选择一
+个）：
+
+~~~bash
+kubectl label node node1 gpu=true
+~~~
+![img](/kubernet-in-action/3.5.1/2023-05-06_18-00.png)
+
+查询拥有gpu labels的node
+~~~bash
+kubectl get node -l gpu
+~~~
+
+#### 3.5.2 将pod调度到特定节点
+
+~~~bash
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-gpu
+spec:
+  nodeSelector:
+    gpu: "true" #node节点有gput=true的，则会调度到这个节点
+  containers:
+  - image: luksa/kubia
+    name: kubia
+~~~
+
+### 3.6 注解pod
+
+####  3.6.1 查找对象的注解
+
+![img](/kubernet-in-action/3.6.1/2023-05-06_18-10.png)
+
+#### 3.6.2 添加和修改注解
+
+给 `kubia-manual` pod添加注解
+~~~bash
+kubectl annotate pod kubia-manual mycompany.com/someannotation="foo bar"
+~~~
+
+查看注解
+~~~bash
+kubectl describe pod kubia-manual
+#注解信息
+Annotations:  mycompany.com/someannotation: foo bar
+~~~
+
+![img](/kubernet-in-action/3.6.2/2023-05-06_18-15.png)
+
+
+### 3.7 使用命名空间对资源进行分组
+
+#### 3.7.2 发现其他命名空间及其 pod
+
+查看所有命名空间
+
+~~~bash
+kubectl get ns
+~~~
+
+查看指定的命名空间pod,`kube-system`
+
+~~~bash
+kubectl get po --namespace kube-system
+~~~
