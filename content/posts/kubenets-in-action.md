@@ -14,6 +14,8 @@ Categories: "book"
 # 常用指令
 
 > 学习中文档不全,慢慢整理.....
+> 
+> 所有资源来自 kubernets in action，只折抄个人需要的
 
 ## 2.开始使用kubernets 和docker
 
@@ -352,4 +354,250 @@ kubectl get ns
 
 ~~~bash
 kubectl get po --namespace kube-system
+
+kubectl get po -n kube-system
 ~~~
+
+#### 3.7.3 创建一个命名空间 
+
+
+~~~bash
+apiVersion: v1
+kind: Namespace #定义命名空间
+metadata:
+  name: custom-namespace # 命名空间名称
+~~~
+
+直接创建 
+
+~~~bash
+kubectl create -f custom-namespace.yaml
+
+#手动创建命名空间
+
+kubectl create namespace custom-namespace
+~~~
+
+查看所有命名空间
+
+~~~bash
+kubectl get namespace
+
+
+NAME               STATUS   AGE
+custom-namespace   Active   57s
+default            Active   4d
+kube-node-lease    Active   4d
+kube-public        Active   4d
+kube-system        Active   4d
+~~~
+
+#### 3.7.4 管理其他命名空间中的对象
+
+
+在创建资源的时候，如果yaml文件没指定，可以在创建时候指定`命名空间`
+
+~~~bash
+kubectl create -f kubia-manual.yam1 -n custom-namespace
+~~~
+
+切换命名空间
+~~~bash
+#获取所有
+kubectl get namespace
+#
+kubectl config set-context --current --namespace=<namespace>
+
+kubectl config set-context --current --namespace=custom-namespace
+#指定操作命名空间
+kubectl get pods -n <namespace>
+#
+~~~
+
+### 3.8 停止和移除 pod
+
+####  3.8.1 按名称删除 pod
+
+~~~bash
+kubectl delete po kubia-gpu
+#删除多个po 
+
+kubectl delete po podl pod2
+
+~~~
+
+#### 3.8.2 使用标签选择器删除 pod
+
+删除带 `creation_method=manua` 的labels的pod
+~~~bash
+kubectl delete po -l creation_method=
+
+#pod "kubia-manual" deleted
+#pod "kubia-manual-v2" deleted
+~~~
+
+#### 3.8.3 通过删除整个命名空间来删除 pod
+
+命名空间不需要的可以直接删除，同时删除里面的pod
+~~~bash
+kubectl delete ns custom-namespace
+~~~
+
+#### 3.8.4 删除命名空间中的所有pod，但保留命名空间
+
+删除所有的pod 
+~~~bash
+kubectl delete po --all
+~~~
+再次查看会发现 之前的pod又重启回来,是因为`ReplicationController`，杀死之后会启动与之相同的pod，得得先删除  `ReplicationController`
+
+#### 3.8.5 删除命名空间中的（几乎）所有资源
+~~~bash
+kubectl delete all --all
+
+
+pod "kubia-fvn4n" deleted
+pod "kubia-lnwdg" deleted
+pod "kubia-tgnlk" deleted
+replicationcontroller "kubia" deleted #删除了 ReplicationController 所有的资源被删除
+service "kubernetes" deleted
+service "kubia-http" deleted
+~~~
+> 命令中的第 一个 all 指定正在删除所有资源类型， 而 --all 选项指定将删除所有资源实例而不是按名称指定它们（我们在运行前一个删除命令时已经使用过此选项）。
+
+>注意 kubectl delete all --all 命令也会删除名为 kubernetes 的Service, 但它应该会在几分钟后自动重新创建。
+
+### 3.9 本章小结
+阅读本章之后， 你应该对 Kubemetes 的核心模块有了系统的了解。 在接下来的
+几章中学到的概念也都与 pod 有着直接关联。
+
+在本章中， 你应该已经掌握：
+- 如何决定是否应将某些容器组合在一个 pod 中。
+- pod可以运行多个进程， 这和非容器世界中的物理主机类似。
+- 可以编写 YAML 或 JSON 描述文件用于创建 pod, 然后查看 pod 的规格及其
+当前状态。
+- 使用标签来组织 pod, 并且一 次在多个 pod 上执行操作。
+- 可以使用节点标签将 pod 只调度到提供某些指定特性的节点上。
+- 注解允许入们、 工具或库将更大的数据块附加到 pod。
+- 命名空间可用千允 许不同团队使 用同 一 集 群， 就像它 们使 用单独的
+Kubemetes 集群一 样。
+- 使用 kubectl explain 命令快速查看任何 Kubernetes 资源的信息。
+在下一章， 你将会了解到 ReplicationController 和其他管理 pod 的资源。
+
+
+## 4. 副本机制和其他控制器:部署托管的pod
+
+### 4.1 保持pod健康
+
+- 使用 Kubernetes 的一 个主要好处是， 可以给 Kubernetes 一个容器列表来由其 保
+持容器在集群中的运行。 可以通过让 Kubernetes 创建 pod 资源， 为其选择 一 个工作
+节点并在该节点上运行该 pod 的容器来完成此操作。 但是， 如果其中一个容器终止，
+或一 个 pod 的所有容器都终止， 怎么办？
+- 只要将 pod 调度到某个节点， 该节点上的 Kubelet 就会运行 pod 的容器， 从此
+只要该 pod 存在， 就会保持运行。 如果容器的主进程崩溃， Kubelet 将重启容器。 如
+果应用程序中有一 个导致它每隔 一 段时间就会崩溃的 bug, Kubemetes 会自动重启
+应用程序， 所以即使应用程序本身没有做任何特殊的事， 在 Kubemetes 中运行也能
+自动获得自我修复的能力。
+- 即使进程没有崩溃， 有时应用程序也会停止正常工作。 例如， 具有内存泄漏的
+Java 应用程序将开始抛出 OutOfMemoryErrors, 但 JVM 进程会一 直运行。 如果有
+一种方法， 能让应用程序向 Kubernetes 发出信号， 告诉 Kubemetes 它运行异常并让
+Kubemetes 重新启动， 那就很棒了。
+- 我们已经说过， 一 个崩溃的容器会自动重启， 所以也许你会想到， 可以在应用
+中捕获这类错误， 并在错误发生时退出该进程。 当然可以这样做， 但这仍然不能解
+决所有的问题。
+- 例如， 你的应用因为无限循环或死锁而停止响应。 为确保应用程序在这种情况
+下可以重新启动， 必须从外部检查应用程序的运行状况， 而不是依赖于应用的内部
+检测。
+
+#### 4.1.1 介绍存活探针
+
+Kubemetes 有以下三种探测容器的机制：
+- HTTPGET 探针对容器的 IP 地址（你指定的端口和路径）执行 HTTP GET 请求。
+如果探测器收到响应，并且响应状态码不代表错误（换句话说，如果HTTP
+响应状态码是2xx或3xx), 则认为探测成功。如果服务器返回错误响应状态
+码或者根本没有响应，那么探测就被认为是失败的，容器将被重新启动。
+- TCP套接字探针尝试与容器指定端口建立TCP连接。如果连接成功建立，则
+探测成功。否则，容器重新启动。
+- Exec探针在容器内执行任意命令，并检查命令的退出状态码。如果状态码
+是 o, 则探测成功。所有其他状态码都被认为失败。
+
+
+#### 4.1.2 创建基于HTTP的存活探针
+
+~~~yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-liveness
+spec:
+  containers:
+  - image: luksa/kubia-unhealthy #的含么包怎用像知应镜不的^_（掉这了坏
+    name: kubia
+    livenessProbe: # http get 探针
+      httpGet:
+        path: / #请求路径
+        port: 8080 #端口
+~~~
+
+#### 4.1.3 使用存活探针
+
+4.1.2 使用之后pod 报错会重启
+~~~bash
+kubectl get po kubia-liveness
+~~~
+
+查看log日志
+~~~bash
+
+#查看当前容器
+kubectl logs mypod 
+
+
+#查看上个容器为啥报错
+kubectl logs mypod --previous
+#-----
+Kubia server starting...
+Received request from ::ffff:10.40.0.0
+Received request from ::ffff:10.40.0.0
+Received request from ::ffff:10.40.0.0
+Received request from ::ffff:10.40.0.0
+Received request from ::ffff:10.40.0.0
+Received request from ::ffff:10.40.0.0
+Received request from ::ffff:10.40.0.0
+Received request from ::ffff:10.40.0.0
+~~~
+
+#### 4.1.4 配置存活探针的附加属性
+~~~bash
+kubectl get po kubia-liveness
+
+Liveness:       http-get http://:8080/ delay=0s timeout=1s period=10s #success=1 #failure=3
+~~~
+
+delay(延迟）、巨meout(超时）、period(周期）等。delay=Os部分显示在容器启动后立即开始探测。tmeout仅设置为1秒，因此容器必须在1秒内进行响应， 不然这次探测记作失败。每10秒探测一次容器(period=lOs), 并在探测连续三次失败(#falure= 3)后重启容器
+
+添加自定义参数 `initalDelaySeconds`
+
+~~~yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-liveness
+spec:
+  containers:
+  - image: luksa/kubia-unhealthy
+    name: kubia
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 15 #Kubernetes会在第—次探测前等待15秒
+~~~
+
+>提示务必记得设置一个初始延迟未说明应用程序的启动时间。如果程序启动过久则会重新启动容易，陷入循环
+
+很多场合都会看到这种情况， 用户很困惑为什么他们的容器正在重启。 但是如果使用kubectl describe, 他们会看到容器以退出码137或143结束， 并告诉他们 该pod是被迫终止的。 此外，pod事件的列表将显示容器因liveness探测失败而被终止。 如果你在pod启动时 看到这种情况， 那是因为未能适当设置
+initialDelaySeconds。
+
+>注意退出代码137表示进程被外部信号终止， 退出代码为128+9 (SIGKILL)。
+同样， 退出代码143对应于128+15 (SIGTERM)。
