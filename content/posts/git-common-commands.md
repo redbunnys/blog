@@ -37,6 +37,7 @@ git submodule update --init --recursive
     2. 要将分支推送到远程服务器，请运行 `git push –u origin`。就我而言，该分支的名称是 `bug-fixes`，所以，我需要运行 `git push -u origin bug-`fixes`
     ![](https://www.freecodecamp.org/news/content/images/2022/09/ss4-2.png)
     3. 成功远程新建分支
-    ![](https://www.freecodecamp.org/news/content/images/2022/09/ss5-2.png)
+    
+    - ![](https://www.freecodecamp.org/news/content/images/2022/09/ss5-2.png)
 
 > 原文地址: https://www.freecodecamp.org/chinese/news/git-push-local-branch-to-remote-how-to-publish-a-new-branch-in-git/
