@@ -1,0 +1,3 @@
+[submodule "theme-diary"]
+	path = themes/diary
+	url = https://github.com/zvooo/blog.git
