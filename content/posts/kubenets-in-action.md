@@ -601,3 +601,224 @@ initialDelaySeconds。
 
 >注意退出代码137表示进程被外部信号终止， 退出代码为128+9 (SIGKILL)。
 同样， 退出代码143对应于128+15 (SIGTERM)。
+
+#### 4.1.5 创建有效的存活探针
+
+对于生产环境中一定要有个存活探针
+
+1. 存活探针应该检查什么
+   检查服务是否响应。未响应则重启容器,一般配置特定的url `/health HTTP`
+   >提示请确保/health HTTP瑞点不需要认证， 否则探剧会一直失败， 导致你的容器无限重启。
+2. 保持探针轻量
+   探针只需要知道服务的是否正常运行，不占用大量资源，重量化会影响你的容器运行
+   >如果你在容器中运行Java应用程序， 请确保使用HTTP GET存活探针，而不是启动全新NM以荻取存活信息的Exec探针。 任何基于NM或类似的应用程序也是如此， 它们的启动过程需要大量的计算资原。
+3. 无须在探针中实现重试循环
+  探针失败阈值是可以设置的，你设置为1，但是kubernets 会自动尝试请求多次。因此 在探针中自己实现重试循环是浪费精力。
+
+存活探针小结
+
+- 你现在知道Kubernetes会在你的容器崩溃或其存活探针失败时， 通过重启容器
+来保持运行。 这项任务由承载pod的节点上的Kubelet 执行 一— 在主服务器上运行
+的KubernetesControl Plane组件不 会参与此 过程。
+- 但如果节点本身崩溃， 那么Control Plane 必须为所有随节点停止运行的pod创
+建替代品。 它不 会为你直接创建的pod执行此操作 。 这些pod只被Kubelet 管理，
+但由于Kubelet 本身运行在节点上， 所以如果节点异常终止，它将无法执行任何操作。
+- 为 了 确保你 的应 用 程序在另 一 个 节 点 上 重新启动， 需要使 用
+Rep巨ca巨onController或类似机制管理pod, 我们将在本章其余部分讨论该
+机制。
+
+### 4.2 了解ReplicationController
+   ReplicationController是一 种Kubemetes资源，可确保它的pod始终保持运行状态。
+如果pod因任何原因 消失（例如节点从集群中消失或由于该pod已从节点中逐出），
+则ReplicationController 会注意到缺少了pod并创建替代pod。
+
+#### 4.2.1 ReplicationController的操作
+
+ReplicationController会持续监控正在运行的pod列表， 并保证相应 ” 类型” 的
+pod的数目与期望相符。 如正在运行的pod太少， 它会根据pod模板创建新的副本。
+如正在运行的pod太多， 它将删除多余的副本。 你可能会对有多余的副本感到奇怪。
+这可能有几个原因：
+- 有人会手动创建相同类型的pod。
+- 有人更改现有的pod的 ” 类型” 。
+- 有人减少了所需的pod的数量， 等等。
+
+![img](/kubernet-in-action/2023-05-10_15-52_4.2.1.png)
+
+##### 了解ReplicationController的三部分
+一个ReplicationController有三个主要部分（如图4.3所示）：
+- label selector ( 标签选择器）， 用于确定ReplicationController作用域中有哪些
+pod
+- replica count (副本个数）， 指定应运行的pod 数量
+- pod template (pod模板）， 用于创建新的pod 副本
+  
+![img](/kubernet-in-action/2023-05-10_15-55_4.2.1-2.png)
+
+#### 4.2.2 创建一 个 ReplicationController
+
+~~~yml
+apiVersion: v1
+kind: ReplicationController #配置 ReplicationController(RC)
+metadata:
+  name: kubia #配置 ReplicationController 名字
+spec:
+  replicas: 3 #配置 pod 实例的数量  
+  selector: #pod 决定的RC 操作对象
+    app: kubia #pod
+  template: #创建新的pod 所用的pod模板
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+      - name: kubia
+        image: luksa/kubia
+        ports:
+        - containerPort: 8080
+~~~
+
+新建时，会创建名kubia的新ReplicationControl，确保 app=kubia的pod始终为三个。pod不够会根据模板创建。并且pod 标签要与RC选择器匹配。不然会永无止境的创建。新启动的不会使实际的副本数量接近期望的副本数量。为了防止出现这种情况，API服务会校验ReplicationController的定义，不会接收错误配置。
+>提示定义ReplicationController时不要指定pod选择器，让Kubemetes从pod模板中提取它。这样YAML更简短。
+
+~~~bash
+kubectl create  -f kubia-rc.yaml
+~~~
+
+#### 4.2.3 使用ReplicationController
+
+查看pod
+~~~bash
+kubect get pods
+~~~
+查看 ReplicationController 对已删除的 pod 的响应
+
+~~~bash
+kubect delete pod kubia-53thy
+~~~
+
+获取有关 ReplicationController 的信息
+
+~~~bash
+kubectl get rc
+~~~
+
+>注意使用re作为replicationcontroller的简写。
+
+查看rc详细信息
+~~~bash
+kubect describe get rc
+
+Name:         kubia                                                                                       
+Namespace:    default                                                                                     
+Selector:     app=kubia                                                                                   
+Labels:       app=kubia                                                                                   
+Annotations:  <none>                                                                                      
+Replicas:     3 current / 3 desired      # pod 实际数量和目标数量                                                                  
+Pods Status:  3 Running / 0 Waiting / 0 Succeeded / 0 Failed       #每种状态的pod数量                                        
+Pod Template:                                                                                             
+  Labels:  app=kubia         
+  Containers:                                                                                             
+   kubia:                                                                                                 
+    Image:        luksa/kubia                                                                             
+    Port:         8080/TCP                                                                                
+    Host Port:    0/TCP                                                                                   
+    Environment:  <none>                                                                                  
+    Mounts:       <none>                                                                                  
+  Volumes:        <none>                                                                                  
+Events:                                         #和这个有关的RC 事件                                                           
+  Type    Reason            Age    From                    Message                                        
+  ----    ------            ----   ----                    -------                 
+  Normal  SuccessfulCreate  32m    replication-controller  Created pod: kubia-wqc7x
+  Normal  SuccessfulCreate  32m    replication-controller  Created pod: kubia-hxgzj
+  Normal  SuccessfulCreate  32m    replication-controller  Created pod: kubia-hv7px
+  Normal  SuccessfulCreate  5m11s  replication-controller  Created pod: kubia-8z4mz
+  Normal  SuccessfulCreate  3m1s   replication-controller  Created pod: kubia-jfslp
+~~~
+
+#### 4.2.4 将 pod 移入或移出 ReplicationController 的作用域
+
+由ReplicationController创建的pod并不是绑定到ReplicationController。是由标签选择器匹配。如果我们更改pod的标签不与相匹配。可以从RC作用域中删除添加。也可以转移到其他的ReplicationController。
+
+ 如果更改了pod的标签，不匹配。异常不会被重新调度，成为手动创建的一样。更改之后旧的ReplicationController 会调度新的保持。
+
+>尽管一个pod没有绑定到一个ReplicationController，但该pod在rnetadata.ownerReferences字段中引用它，可以轻松使用它来找 到一个pod属于哪个ReplicationController
+
+
+给ReplicationController管理的pod加标签
+1. 你向reaplcationController 管理的pod添加其他标签，没有任何影响
+   
+   ~~~bash
+   kubectl label pod kubia-jlm79 type=special
+
+   kubectl  get pod --show-labels
+
+   NAME          READY   STATUS    RESTARTS   AGE   LABELS
+   kubia-8z4mz   1/1     Running   0          49m   app=kubia
+   kubia-jlm79   1/1     Running   0          30m   app=kubia,type=special
+   kubia-wdlc8   1/1     Running   0          30m   app=kubia
+   ~~~
+
+2. 更改己托管的od 的标签
+   ~~~bash
+   kubectl label pod  kubia-wdlc8  app=foo --overwrite
+
+   NAME          READY   STATUS    RESTARTS   AGE   LABELS
+   kubia-8z4mz   1/1     Running   0          53m   app=kubia
+   kubia-jlm79   1/1     Running   0          35m   app=kubia,type=special
+   kubia-qz9dx   1/1     Running   0          7s    app=kubia
+   kubia-wdlc8   1/1     Running   0          35m   app=foo
+   ~~~
+   由此可见，更改之后新建了
+
+3. 从控制器删除pod
+   当你想操作特定的 pod 时， 从 ReplicationController 管理范围中移除 pod 的操作很管用。例如，你可能有一个 bug 导致你的 pod 在特定时间或特定事件后开始出问题。如果你知道某个 pod 发生了故障， 就可以将它从 Replication-Controller 的管理范围中移除， 让控制器将它替换为新 pod, 接着这个 pod 就任你处置了。 完成后删除该pod 即可。
+
+
+#### 4.2.5 修改pod模板
+
+打开现有的模板
+~~~bash
+kubectl edit  rc  kubia
+~~~
+打开现有的模板，我们添加一个新的标签
+
+输出`replicationconColler "kubia" edited`
+
+下次新启动的pod就带你添加的 label
+>配置kubectl edit使用不同的文本编辑器可以通过设置KUBE_EDITOR环境变量来告诉kubectl使用你期望的文本编辑器。 例如，如果你想使用nano编辑Kubernetes资源，请执行以下命令（或将其放入- /.bashrc或等效文件中）：
+>
+>export KUBE_EDITOR="/usr/bin/nano"
+>
+>如果未设置KUBE_EDITOR环境变量， 则kubectl edted会回退到使用默认编辑器（通常通过EDITOR环境变量进行配置）。
+
+#### 4.2.6 水平缩放pod
+
+你已经看到了ReplicationController如何确保待续运行的pod实例 数量保持不变。因为改变副本的所需数量非常简单， 所以这也意味着水平缩放pod很简单。放大或者缩小pod的数量规模就和在ReplicationController资源中更改Replicas字段的值 一样简单。 更改之后，ReplicationController将 会看到存在太多的pod并删除其中的一部分（缩容时）， 或者看到它们数目太少并创建 pod (扩容时）。
+
+1. ReplicationController扩容
+   现在的副本一直保持3，现在给扩容到10
+   
+   ~~~bash
+   kubectl scale rc kubia --replicas=10
+   ~~~
+
+   但这次你的做法会不一样。通过编辑定义来缩放ReplicationController
+   ~~~bash
+   kubectl edit rc kubia
+   
+   apiVersion: v1
+   kind: ReplicationController
+   metadata:
+     creationTimestamp: "2023-05-10T08:09:50Z"
+     generation: 4
+     labels:
+       app: kubia
+     name: kubia
+     namespace: default
+     resourceVersion: "618771"
+     uid: 337c97c4-1c94-4aba-885e-27ce02c8a378
+   spec:
+     replicas: 10 # 这里修改
+     selector:
+       app: kubia
+     template:
+   ~~~
