@@ -1,0 +1,142 @@
+<!doctype html><html><head><title>go 反射简单使用(Reflect)</title><meta charset=utf-8><meta name=X-UA-Compatible content="IE=edge"><meta name=google-site-verification content><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name=viewport><meta content="telephone=no" name=format-detection><meta name=description content="反射的简单使用"><meta name=renderer content="webkit"><meta name=theme-color content="#ffffff"><script async src="https://www.googletagmanager.com/gtag/js?id=G-GT370SNKC1"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GT370SNKC1",{anonymize_ip:!1})}</script><link rel=icon href=https://www.okrust.com/favicon.png><script src=/js/toc.js></script>
+<link type=text/css rel=stylesheet href=/vendor/css/bootstrap.min.css><link rel=stylesheet href=/scss/dark-mode.min.cb53f1bee2b8900cb4f082afbf00175d6618f281cf9a2fe8619e3b52d20b5721.css integrity="sha256-y1PxvuK4kAy08IKvvwAXXWYY8oHPmi/oYZ47UtILVyE=" media=screen><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Material+Icons"></head><body><div id=app><div class=single-column-drawer-container id=drawer v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }"><div class=drawer-content><div class=drawer-menu><a class="a-block drawer-menu-item active" href=/posts>Archive</a>
+<a class="a-block drawer-menu-item false" href=/tags>Tags</a>
+<a class="a-block drawer-menu-item false" href=/categories>Categories</a><div class=toc><div class=toc-content><center>- CATALOG -</center><ul><li><a href=#%e5%8f%8d%e5%b0%84 class=nav-反射>反射</a></li><ul><li><a href=#%e4%bd%bf%e7%94%a8%e5%8f%8d%e5%b0%84 class=nav-使用反射>使用反射</a></li><ul><li><a href=#%e5%8f%8d%e5%b0%84reflecttypeof-reflectvalueof class=nav-反射reflecttypeof-reflectvalueof>反射(reflect.TypeOf reflect.ValueOf)</a></li><ul><li><a href=#%e8%8e%b7%e5%8f%96%e4%b8%80%e4%b8%aa%e5%8f%98%e9%87%8f class=nav-获取一个变量>获取一个变量</a></li><li><a href=#kind--%e6%96%b9%e6%b3%95 class=nav-kind--方法>Kind 方法</a></li><li><a href=#%e9%80%9a%e8%bf%87%e5%8f%8d%e5%b0%84%e4%bf%ae%e6%94%b9%e5%80%bc class=nav-通过反射修改值>通过反射修改值</a></li><li><a href=#%e5%8f%8d%e5%b0%84%e5%ae%9e%e7%8e%b0%e4%b8%80%e4%b8%aasql%e7%94%9f%e6%88%90%e5%99%a8demo class=nav-反射实现一个sql生成器demo>反射实现一个sql生成器demo</a></li></ul></div></div></div></div></div><transition name=fade><div id=drawer-mask v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if=isDrawerOpen v-on:click=toggleDrawer></div></transition><nav id=navBar class="navbar sticky-top navbar-light single-column-nav-container"><div id=navBackground class=nav-background></div><div class="container container-narrow nav-content"><button id=nav_dropdown_btn class=nav-dropdown-toggle type=button v-on:click=toggleDrawer>
+<i class=material-icons>menu</i></button>
+<a id=navTitle class=navbar-brand href=https://www.okrust.com/>okrust</a>
+<button type=button class=nav-darkmode-toggle id=darkModeToggleButton2>
+<i class=material-icons id=darkModeToggleIcon2>dark_mode</i></button></div></nav><div class=single-column-header-container id=pageHead v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }"><a href=https://www.okrust.com/><div class=single-column-header-title>okrust</div></a></div><div id=content><div id=streamContainer class=stream-container><div class="post-list-container post-list-container-shadow"><div class=post><div class=post-head-wrapper style=background-image:url(https://w.wallhaven.cc/full/5g/wallhaven-5g7ew7.jpg)><div class=post-title>go 反射简单使用(Reflect)<div class=post-subtitle>反射的简单使用</div><div class=post-meta><time itemprop=datePublished>2023-05-25 13:53</time>
+<i class=material-icons>folder</i>
+<a href=/categories/go>go</a>
+&nbsp;
+<i class=material-icons>label</i>
+<a href=/tags/reflect>reflect</a>
+&nbsp;</div></div></div><div class=post-body-wrapper><div class=post-body v-pre><h1 id=反射>反射</h1><blockquote><p>介绍基本使用，具体深入点击下面的链接</p><p>深入理解 :<a href=https://draveness.me/golang/docs/part2-foundation/ch04-basic/golang-reflect/>点击跳转</a></p></blockquote><h2 id=使用反射>使用反射</h2><p>虽然在大多数的应用和服务中并不常见，但是很多框架都依赖 Go 语言的反射机制简化代码。因为 Go 语言的语法元素很少、设计简单，所以它没有特别强的表达能力，但是 Go 语言的 reflect 包能够弥补它在语法上reflect.Type的一些劣势。</p><p>reflect 实现了运行时的反射能力，能够让程序操作不同类型的对象。</p><p>反射主要围绕这两个函数运行:</p><ul><li>reflect.TypeOf 能获取类型信息</li><li>reflect.ValueOf 能获取数据的运行时表示</li></ul><h3 id=反射reflecttypeof-reflectvalueof>反射(reflect.TypeOf reflect.ValueOf)</h3><h4 id=获取一个变量>获取一个变量</h4><div class=highlight><pre tabindex=0 style=color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span>strings <span style=color:#ff7b72;font-weight:700>:=</span> <span style=color:#a5d6ff>123</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>t <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>TypeOf</span>(strings)
+</span></span><span style=display:flex><span>v <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>ValueOf</span>(strings)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(t)
+</span></span><span style=display:flex><span>fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(v)
+</span></span></code></pre></div><p>output: int 123</p><p>TypeOf 主要获取变量的类型
+ValueOf 主要获取变量的值</p><h4 id=heading></h4><p>下面来一个结构体</p><div class=highlight><pre tabindex=0 style=color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#ff7b72>type</span> student <span style=color:#ff7b72>struct</span> {
+</span></span><span style=display:flex><span>	name <span style=color:#ff7b72>string</span>
+</span></span><span style=display:flex><span>	age  <span style=color:#ff7b72>int</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff7b72>func</span> <span style=color:#d2a8ff;font-weight:700>main</span>() {
+</span></span><span style=display:flex><span>	s <span style=color:#ff7b72;font-weight:700>:=</span> student{
+</span></span><span style=display:flex><span>		name: <span style=color:#a5d6ff>&#34;go&#34;</span>,
+</span></span><span style=display:flex><span>		age:  <span style=color:#a5d6ff>16</span>,
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	t <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>TypeOf</span>(s)
+</span></span><span style=display:flex><span>	v <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>ValueOf</span>(s)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(t)
+</span></span><span style=display:flex><span>	fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(v)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#ff7b72>for</span> i <span style=color:#ff7b72;font-weight:700>:=</span> <span style=color:#a5d6ff>0</span>; i &lt; v.<span style=color:#d2a8ff;font-weight:700>NumField</span>(); i<span style=color:#ff7b72;font-weight:700>++</span> {
+</span></span><span style=display:flex><span>		fmt.<span style=color:#d2a8ff;font-weight:700>Printf</span>(<span style=color:#a5d6ff>&#34;type:%v,value:%v\n&#34;</span>, v.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).<span style=color:#d2a8ff;font-weight:700>Type</span>(), v.<span style=color:#d2a8ff;font-weight:700>Field</span>(i))
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这里用到了<code>for</code> 是因为结构体里面有多个字段</p><ol><li><code>reflect.ValueOf(s).NumField()</code> 是获取结构体里面有多少个字段</li><li><code>reflect.ValueOf(s).Field([index])</code> 是 <code>reflect.Value</code> 一个方法，获取字段里的值</li></ol><h4 id=kind--方法>Kind 方法</h4><p>主要获取当前传入的类型</p><div class=highlight><pre tabindex=0 style=color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#ff7b72>func</span> <span style=color:#d2a8ff;font-weight:700>main</span>() {
+</span></span><span style=display:flex><span>	s <span style=color:#ff7b72;font-weight:700>:=</span> student{
+</span></span><span style=display:flex><span>		name: <span style=color:#a5d6ff>&#34;go&#34;</span>,
+</span></span><span style=display:flex><span>		age:  <span style=color:#a5d6ff>16</span>,
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	t <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>TypeOf</span>(s)
+</span></span><span style=display:flex><span>	v <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>ValueOf</span>(s)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(<span style=color:#a5d6ff>&#34;TypeOfKind:&#34;</span>, t.<span style=color:#d2a8ff;font-weight:700>Kind</span>())
+</span></span><span style=display:flex><span>	fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(<span style=color:#a5d6ff>&#34;ValueOfKind:&#34;</span>, v.<span style=color:#d2a8ff;font-weight:700>Kind</span>())
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	f <span style=color:#ff7b72;font-weight:700>:=</span> <span style=color:#a5d6ff>3.14159</span>
+</span></span><span style=display:flex><span>	t = reflect.<span style=color:#d2a8ff;font-weight:700>TypeOf</span>(f)
+</span></span><span style=display:flex><span>	v = reflect.<span style=color:#d2a8ff;font-weight:700>ValueOf</span>(f)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(<span style=color:#a5d6ff>&#34;TypeOfKind:&#34;</span>, t.<span style=color:#d2a8ff;font-weight:700>Kind</span>())
+</span></span><span style=display:flex><span>	fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(<span style=color:#a5d6ff>&#34;ValueOfKind:&#34;</span>, v.<span style=color:#d2a8ff;font-weight:700>Kind</span>())
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//output:
+</span></span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//TypeOfKind: struct
+</span></span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//ValueOfKind: struct
+</span></span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic></span>
+</span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//TypeOfKind: float64
+</span></span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//ValueOfKind: float64
+</span></span></span></code></pre></div><p>可以看出 结构体是 <code>struct</code>,定义变量是 <code>float</code>,但是结构体里面有其他的字段，每个字段 类型也不一样，也可以获取</p><div class=highlight><pre tabindex=0 style=color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#ff7b72>func</span> <span style=color:#d2a8ff;font-weight:700>main</span>() {
+</span></span><span style=display:flex><span>	s <span style=color:#ff7b72;font-weight:700>:=</span> student{
+</span></span><span style=display:flex><span>		name: <span style=color:#a5d6ff>&#34;go&#34;</span>,
+</span></span><span style=display:flex><span>		age:  <span style=color:#a5d6ff>16</span>,
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	t <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>TypeOf</span>(s)
+</span></span><span style=display:flex><span>	v <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>ValueOf</span>(s)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#ff7b72>for</span> i <span style=color:#ff7b72;font-weight:700>:=</span> <span style=color:#a5d6ff>0</span>; i &lt; v.<span style=color:#d2a8ff;font-weight:700>NumField</span>(); i<span style=color:#ff7b72;font-weight:700>++</span> {
+</span></span><span style=display:flex><span>		fmt.<span style=color:#d2a8ff;font-weight:700>Printf</span>(<span style=color:#a5d6ff>&#34;typeKind:%v,valueKind:%v\n&#34;</span>, v.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).<span style=color:#d2a8ff;font-weight:700>Type</span>().<span style=color:#d2a8ff;font-weight:700>Kind</span>(), v.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).<span style=color:#d2a8ff;font-weight:700>Kind</span>())
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//typeKind:string,valueKind:string
+</span></span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//typeKind:int,valueKind:int
+</span></span></span></code></pre></div><h4 id=通过反射修改值>通过反射修改值</h4><div class=highlight><pre tabindex=0 style=color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#ff7b72>func</span> <span style=color:#d2a8ff;font-weight:700>main</span>() {
+</span></span><span style=display:flex><span>	f <span style=color:#ff7b72;font-weight:700>:=</span> <span style=color:#a5d6ff>3.14</span>
+</span></span><span style=display:flex><span>	v <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>ValueOf</span>(<span style=color:#ff7b72;font-weight:700>&amp;</span>f)
+</span></span><span style=display:flex><span>    <span style=color:#8b949e;font-style:italic>//获取原始指针
+</span></span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic></span>	Uv <span style=color:#ff7b72;font-weight:700>:=</span> v.<span style=color:#d2a8ff;font-weight:700>Elem</span>()
+</span></span><span style=display:flex><span>	fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(<span style=color:#a5d6ff>&#34;values:&#34;</span>, Uv)
+</span></span><span style=display:flex><span>    <span style=color:#8b949e;font-style:italic>//这里是float 所以设置float值
+</span></span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic></span>	Uv.<span style=color:#d2a8ff;font-weight:700>SetFloat</span>(<span style=color:#a5d6ff>1.3456</span>)
+</span></span><span style=display:flex><span>	fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(<span style=color:#a5d6ff>&#34;values:&#34;</span>, Uv)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//values: 3.14
+</span></span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//values: 1.3456
+</span></span></span></code></pre></div><p>传入的一定要是指针否则会报错，</p><h4 id=反射实现一个sql生成器demo>反射实现一个sql生成器demo</h4><div class=highlight><pre tabindex=0 style=color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#ff7b72>func</span> <span style=color:#d2a8ff;font-weight:700>main</span>() {
+</span></span><span style=display:flex><span>	s <span style=color:#ff7b72;font-weight:700>:=</span> student{
+</span></span><span style=display:flex><span>		name: <span style=color:#a5d6ff>&#34;go&#34;</span>,
+</span></span><span style=display:flex><span>		age:  <span style=color:#a5d6ff>16</span>,
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	fmt.<span style=color:#d2a8ff;font-weight:700>Println</span>(<span style=color:#d2a8ff;font-weight:700>QueryCreate</span>(s))
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#ff7b72>func</span> <span style=color:#d2a8ff;font-weight:700>QueryCreate</span>(value <span style=color:#ff7b72>interface</span>{}) <span style=color:#ff7b72>string</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	t <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>TypeOf</span>(value)
+</span></span><span style=display:flex><span>	v <span style=color:#ff7b72;font-weight:700>:=</span> reflect.<span style=color:#d2a8ff;font-weight:700>ValueOf</span>(value)
+</span></span><span style=display:flex><span>	sql <span style=color:#ff7b72;font-weight:700>:=</span> fmt.<span style=color:#d2a8ff;font-weight:700>Sprintf</span>(<span style=color:#a5d6ff>&#34;insert into  %s&#34;</span>, t.<span style=color:#d2a8ff;font-weight:700>Name</span>())
+</span></span><span style=display:flex><span>	columns <span style=color:#ff7b72;font-weight:700>:=</span> <span style=color:#a5d6ff>&#34;(&#34;</span>
+</span></span><span style=display:flex><span>	values <span style=color:#ff7b72;font-weight:700>:=</span> <span style=color:#a5d6ff>&#34;values (&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#ff7b72>for</span> i <span style=color:#ff7b72;font-weight:700>:=</span> <span style=color:#a5d6ff>0</span>; i &lt; v.<span style=color:#d2a8ff;font-weight:700>NumField</span>(); i<span style=color:#ff7b72;font-weight:700>++</span> {
+</span></span><span style=display:flex><span>		<span style=color:#ff7b72>switch</span> v.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).<span style=color:#d2a8ff;font-weight:700>Kind</span>() {
+</span></span><span style=display:flex><span>		<span style=color:#ff7b72>case</span> reflect.Int:
+</span></span><span style=display:flex><span>			<span style=color:#ff7b72>if</span> i <span style=color:#ff7b72;font-weight:700>==</span> <span style=color:#a5d6ff>0</span> {
+</span></span><span style=display:flex><span>				columns <span style=color:#ff7b72;font-weight:700>+=</span> fmt.<span style=color:#d2a8ff;font-weight:700>Sprintf</span>(<span style=color:#a5d6ff>&#34;%s&#34;</span>, t.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).Name)
+</span></span><span style=display:flex><span>				values <span style=color:#ff7b72;font-weight:700>+=</span> fmt.<span style=color:#d2a8ff;font-weight:700>Sprintf</span>(<span style=color:#a5d6ff>&#34;%d&#34;</span>, v.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).<span style=color:#d2a8ff;font-weight:700>Int</span>())
+</span></span><span style=display:flex><span>			} <span style=color:#ff7b72>else</span> {
+</span></span><span style=display:flex><span>				columns <span style=color:#ff7b72;font-weight:700>+=</span> fmt.<span style=color:#d2a8ff;font-weight:700>Sprintf</span>(<span style=color:#a5d6ff>&#34;, %s&#34;</span>, t.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).Name)
+</span></span><span style=display:flex><span>				values <span style=color:#ff7b72;font-weight:700>+=</span> fmt.<span style=color:#d2a8ff;font-weight:700>Sprintf</span>(<span style=color:#a5d6ff>&#34;, %d&#34;</span>, v.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).<span style=color:#d2a8ff;font-weight:700>Int</span>())
+</span></span><span style=display:flex><span>			}
+</span></span><span style=display:flex><span>		<span style=color:#ff7b72>case</span> reflect.String:
+</span></span><span style=display:flex><span>			<span style=color:#ff7b72>if</span> i <span style=color:#ff7b72;font-weight:700>==</span> <span style=color:#a5d6ff>0</span> {
+</span></span><span style=display:flex><span>				columns <span style=color:#ff7b72;font-weight:700>+=</span> fmt.<span style=color:#d2a8ff;font-weight:700>Sprintf</span>(<span style=color:#a5d6ff>&#34;%s&#34;</span>, t.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).Name)
+</span></span><span style=display:flex><span>				values <span style=color:#ff7b72;font-weight:700>+=</span> fmt.<span style=color:#d2a8ff;font-weight:700>Sprintf</span>(<span style=color:#a5d6ff>&#34;&#39;%s&#39;&#34;</span>, v.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).<span style=color:#d2a8ff;font-weight:700>String</span>())
+</span></span><span style=display:flex><span>			} <span style=color:#ff7b72>else</span> {
+</span></span><span style=display:flex><span>				columns <span style=color:#ff7b72;font-weight:700>+=</span> fmt.<span style=color:#d2a8ff;font-weight:700>Sprintf</span>(<span style=color:#a5d6ff>&#34;, %s&#34;</span>, t.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).Name)
+</span></span><span style=display:flex><span>				values <span style=color:#ff7b72;font-weight:700>+=</span> fmt.<span style=color:#d2a8ff;font-weight:700>Sprintf</span>(<span style=color:#a5d6ff>&#34;, &#39;%s&#39;&#34;</span>, v.<span style=color:#d2a8ff;font-weight:700>Field</span>(i).<span style=color:#d2a8ff;font-weight:700>String</span>())
+</span></span><span style=display:flex><span>			}
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	columns <span style=color:#ff7b72;font-weight:700>+=</span> <span style=color:#a5d6ff>&#34;); &#34;</span>
+</span></span><span style=display:flex><span>	values <span style=color:#ff7b72;font-weight:700>+=</span> <span style=color:#a5d6ff>&#34;); &#34;</span>
+</span></span><span style=display:flex><span>	sql <span style=color:#ff7b72;font-weight:700>+=</span> columns <span style=color:#ff7b72;font-weight:700>+</span> values
+</span></span><span style=display:flex><span>	<span style=color:#ff7b72>return</span> sql
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#8b949e;font-style:italic>//output: insert into  student(name, age); values (&#39;go&#39;, 16);
+</span></span></span></code></pre></div><hr width=100% id=EOF><p style=color:#777>Last modified on 2023-05-25</p></div></div><nav class=post-pagination><a class=newer-posts>Next<br>No newer posts.</a>
+<a class=older-posts href=/posts/kubenets-in-action/>Previous<br>Kubenets in Action cli</a></nav><div class=post-comment-wrapper><p style=opacity:.6 align=center><small>Comments Disabled.</small></p></div></div></div></div></div><div id=sideContainer class=side-container><a class="a-block nav-head false" href=https://www.okrust.com/><div class=nav-title>okrust</div></a><div class=nav-link-list><a class="a-block nav-link-item active" href=/posts>Archive</a>
+<a class="a-block nav-link-item false" href=/tags>Tags</a>
+<a class="a-block nav-link-item false" href=/categories>Categories</a></div><div class=nav-footer>Hugo Theme <a href=https://github.com/amazingrise/hugo-theme-diary>Diary</a> by <a href=https://risehere.net/>Rise</a><br>Ported from <a href=https://mak1t0.cc/ target=_blank rel="noreferrer noopener">Makito</a>'s <a href=https://github.com/SumiMakito/hexo-theme-journal/ target=_blank rel="noreferrer noopener">Journal.</a><br><br>&copy;
+okrust所有</div></div><div id=extraContainer class=extra-container><div class=toc-wrapper><div class=toc><div class=toc-content><center>- CATALOG -</center><ul><li><a href=#%e5%8f%8d%e5%b0%84 class=nav-反射>反射</a></li><ul><li><a href=#%e4%bd%bf%e7%94%a8%e5%8f%8d%e5%b0%84 class=nav-使用反射>使用反射</a></li><ul><li><a href=#%e5%8f%8d%e5%b0%84reflecttypeof-reflectvalueof class=nav-反射reflecttypeof-reflectvalueof>反射(reflect.TypeOf reflect.ValueOf)</a></li><ul><li><a href=#%e8%8e%b7%e5%8f%96%e4%b8%80%e4%b8%aa%e5%8f%98%e9%87%8f class=nav-获取一个变量>获取一个变量</a></li><li><a href=#kind--%e6%96%b9%e6%b3%95 class=nav-kind--方法>Kind 方法</a></li><li><a href=#%e9%80%9a%e8%bf%87%e5%8f%8d%e5%b0%84%e4%bf%ae%e6%94%b9%e5%80%bc class=nav-通过反射修改值>通过反射修改值</a></li><li><a href=#%e5%8f%8d%e5%b0%84%e5%ae%9e%e7%8e%b0%e4%b8%80%e4%b8%aasql%e7%94%9f%e6%88%90%e5%99%a8demo class=nav-反射实现一个sql生成器demo>反射实现一个sql生成器demo</a></li></ul></div></div></div><div class=pagination><a id=globalBackToTop class="pagination-action animated-visibility" href=#top :class="{ invisible: scrollY == 0 }"><i class="material-icons pagination-action-icon">keyboard_arrow_up</i></a>
+<a type=button class=pagination-action id=darkModeToggleButton><span class="material-icons pagination-action-icon" id=darkModeToggleIcon>dark_mode</span></a></div></div><div id=single-column-footer>Hugo Theme <a href=https://github.com/amazingrise/hugo-theme-diary>Diary</a> by <a href=https://risehere.net/>Rise</a><br>Ported from <a href=https://mak1t0.cc/ target=_blank rel="noreferrer noopener">Makito</a>'s <a href=https://github.com/SumiMakito/hexo-theme-journal/ target=_blank rel="noreferrer noopener">Journal.</a><br><br>&copy;
+okrust所有</div></div><script src=/js/journal.js></script></body></html>

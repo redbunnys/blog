@@ -1,4 +1,155 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>okrust所有</copyright><lastBuildDate>Fri, 05 May 2023 16:33:24 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubenets in Action cli</title><link>https://www.okrust.com/posts/kubenets-in-action/</link><pubDate>Fri, 05 May 2023 16:33:24 +0800</pubDate><guid>https://www.okrust.com/posts/kubenets-in-action/</guid><description>okrust https://www.okrust.com/posts/kubenets-in-action/ -&lt;h1 id="常用指令">常用指令&lt;/h1>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>okrust所有</copyright><lastBuildDate>Thu, 25 May 2023 13:53:24 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>go 反射简单使用(Reflect)</title><link>https://www.okrust.com/posts/golang/reflect/</link><pubDate>Thu, 25 May 2023 13:53:24 +0800</pubDate><guid>https://www.okrust.com/posts/golang/reflect/</guid><description>okrust https://www.okrust.com/posts/golang/reflect/ -&lt;h1 id="反射">反射&lt;/h1>
+&lt;blockquote>
+&lt;p>介绍基本使用，具体深入点击下面的链接&lt;/p>
+&lt;p>深入理解 :&lt;a href="https://draveness.me/golang/docs/part2-foundation/ch04-basic/golang-reflect/">点击跳转&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="使用反射">使用反射&lt;/h2>
+&lt;p>虽然在大多数的应用和服务中并不常见，但是很多框架都依赖 Go 语言的反射机制简化代码。因为 Go 语言的语法元素很少、设计简单，所以它没有特别强的表达能力，但是 Go 语言的 reflect 包能够弥补它在语法上reflect.Type的一些劣势。&lt;/p>
+&lt;p>reflect 实现了运行时的反射能力，能够让程序操作不同类型的对象。&lt;/p>
+&lt;p>反射主要围绕这两个函数运行:&lt;/p>
+&lt;ul>
+&lt;li>reflect.TypeOf 能获取类型信息&lt;/li>
+&lt;li>reflect.ValueOf 能获取数据的运行时表示&lt;/li>
+&lt;/ul>
+&lt;h3 id="反射reflecttypeof-reflectvalueof">反射(reflect.TypeOf reflect.ValueOf)&lt;/h3>
+&lt;h4 id="获取一个变量">获取一个变量&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>strings &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> &lt;span style="color:#a5d6ff">123&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">TypeOf&lt;/span>(strings)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>v &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">ValueOf&lt;/span>(strings)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(t)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(v)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>output: int 123&lt;/p>
+&lt;p>TypeOf 主要获取变量的类型
+ValueOf 主要获取变量的值&lt;/p>
+&lt;h4 id="heading">&lt;/h4>
+&lt;p>下面来一个结构体&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">type&lt;/span> student &lt;span style="color:#ff7b72">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name &lt;span style="color:#ff7b72">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> age &lt;span style="color:#ff7b72">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">func&lt;/span> &lt;span style="color:#d2a8ff;font-weight:bold">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> student{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#a5d6ff">&amp;#34;go&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> age: &lt;span style="color:#a5d6ff">16&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">TypeOf&lt;/span>(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">ValueOf&lt;/span>(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(t)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(v)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">for&lt;/span> i &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> &lt;span style="color:#a5d6ff">0&lt;/span>; i &amp;lt; v.&lt;span style="color:#d2a8ff;font-weight:bold">NumField&lt;/span>(); i&lt;span style="color:#ff7b72;font-weight:bold">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Printf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;type:%v,value:%v\n&amp;#34;&lt;/span>, v.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).&lt;span style="color:#d2a8ff;font-weight:bold">Type&lt;/span>(), v.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里用到了&lt;code>for&lt;/code> 是因为结构体里面有多个字段&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>reflect.ValueOf(s).NumField()&lt;/code> 是获取结构体里面有多少个字段&lt;/li>
+&lt;li>&lt;code>reflect.ValueOf(s).Field([index])&lt;/code> 是 &lt;code>reflect.Value&lt;/code> 一个方法，获取字段里的值&lt;/li>
+&lt;/ol>
+&lt;h4 id="kind--方法">Kind 方法&lt;/h4>
+&lt;p>主要获取当前传入的类型&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">func&lt;/span> &lt;span style="color:#d2a8ff;font-weight:bold">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> student{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#a5d6ff">&amp;#34;go&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> age: &lt;span style="color:#a5d6ff">16&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">TypeOf&lt;/span>(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">ValueOf&lt;/span>(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;TypeOfKind:&amp;#34;&lt;/span>, t.&lt;span style="color:#d2a8ff;font-weight:bold">Kind&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;ValueOfKind:&amp;#34;&lt;/span>, v.&lt;span style="color:#d2a8ff;font-weight:bold">Kind&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> &lt;span style="color:#a5d6ff">3.14159&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t = reflect.&lt;span style="color:#d2a8ff;font-weight:bold">TypeOf&lt;/span>(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v = reflect.&lt;span style="color:#d2a8ff;font-weight:bold">ValueOf&lt;/span>(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;TypeOfKind:&amp;#34;&lt;/span>, t.&lt;span style="color:#d2a8ff;font-weight:bold">Kind&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;ValueOfKind:&amp;#34;&lt;/span>, v.&lt;span style="color:#d2a8ff;font-weight:bold">Kind&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//output:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//TypeOfKind: struct
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//ValueOfKind: struct
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//TypeOfKind: float64
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//ValueOfKind: float64
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看出 结构体是 &lt;code>struct&lt;/code>,定义变量是 &lt;code>float&lt;/code>,但是结构体里面有其他的字段，每个字段 类型也不一样，也可以获取&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">func&lt;/span> &lt;span style="color:#d2a8ff;font-weight:bold">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> student{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#a5d6ff">&amp;#34;go&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> age: &lt;span style="color:#a5d6ff">16&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">TypeOf&lt;/span>(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">ValueOf&lt;/span>(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">for&lt;/span> i &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> &lt;span style="color:#a5d6ff">0&lt;/span>; i &amp;lt; v.&lt;span style="color:#d2a8ff;font-weight:bold">NumField&lt;/span>(); i&lt;span style="color:#ff7b72;font-weight:bold">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Printf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;typeKind:%v,valueKind:%v\n&amp;#34;&lt;/span>, v.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).&lt;span style="color:#d2a8ff;font-weight:bold">Type&lt;/span>().&lt;span style="color:#d2a8ff;font-weight:bold">Kind&lt;/span>(), v.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).&lt;span style="color:#d2a8ff;font-weight:bold">Kind&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//typeKind:string,valueKind:string
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//typeKind:int,valueKind:int
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="通过反射修改值">通过反射修改值&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">func&lt;/span> &lt;span style="color:#d2a8ff;font-weight:bold">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> &lt;span style="color:#a5d6ff">3.14&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">ValueOf&lt;/span>(&lt;span style="color:#ff7b72;font-weight:bold">&amp;amp;&lt;/span>f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8b949e;font-style:italic">//获取原始指针
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">&lt;/span> Uv &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> v.&lt;span style="color:#d2a8ff;font-weight:bold">Elem&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;values:&amp;#34;&lt;/span>, Uv)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8b949e;font-style:italic">//这里是float 所以设置float值
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">&lt;/span> Uv.&lt;span style="color:#d2a8ff;font-weight:bold">SetFloat&lt;/span>(&lt;span style="color:#a5d6ff">1.3456&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;values:&amp;#34;&lt;/span>, Uv)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//values: 3.14
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//values: 1.3456
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>传入的一定要是指针否则会报错，&lt;/p>
+&lt;h4 id="反射实现一个sql生成器demo">反射实现一个sql生成器demo&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">func&lt;/span> &lt;span style="color:#d2a8ff;font-weight:bold">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> student{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#a5d6ff">&amp;#34;go&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> age: &lt;span style="color:#a5d6ff">16&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Println&lt;/span>(&lt;span style="color:#d2a8ff;font-weight:bold">QueryCreate&lt;/span>(s))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72">func&lt;/span> &lt;span style="color:#d2a8ff;font-weight:bold">QueryCreate&lt;/span>(value &lt;span style="color:#ff7b72">interface&lt;/span>{}) &lt;span style="color:#ff7b72">string&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">TypeOf&lt;/span>(value)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> reflect.&lt;span style="color:#d2a8ff;font-weight:bold">ValueOf&lt;/span>(value)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sql &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Sprintf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;insert into %s&amp;#34;&lt;/span>, t.&lt;span style="color:#d2a8ff;font-weight:bold">Name&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> columns &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;(&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> values &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;values (&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">for&lt;/span> i &lt;span style="color:#ff7b72;font-weight:bold">:=&lt;/span> &lt;span style="color:#a5d6ff">0&lt;/span>; i &amp;lt; v.&lt;span style="color:#d2a8ff;font-weight:bold">NumField&lt;/span>(); i&lt;span style="color:#ff7b72;font-weight:bold">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">switch&lt;/span> v.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).&lt;span style="color:#d2a8ff;font-weight:bold">Kind&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">case&lt;/span> reflect.Int:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">if&lt;/span> i &lt;span style="color:#ff7b72;font-weight:bold">==&lt;/span> &lt;span style="color:#a5d6ff">0&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> columns &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Sprintf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;%s&amp;#34;&lt;/span>, t.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).Name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> values &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Sprintf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;%d&amp;#34;&lt;/span>, v.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).&lt;span style="color:#d2a8ff;font-weight:bold">Int&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#ff7b72">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> columns &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Sprintf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;, %s&amp;#34;&lt;/span>, t.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).Name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> values &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Sprintf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;, %d&amp;#34;&lt;/span>, v.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).&lt;span style="color:#d2a8ff;font-weight:bold">Int&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">case&lt;/span> reflect.String:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">if&lt;/span> i &lt;span style="color:#ff7b72;font-weight:bold">==&lt;/span> &lt;span style="color:#a5d6ff">0&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> columns &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Sprintf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;%s&amp;#34;&lt;/span>, t.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).Name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> values &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Sprintf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;&amp;#39;%s&amp;#39;&amp;#34;&lt;/span>, v.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).&lt;span style="color:#d2a8ff;font-weight:bold">String&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#ff7b72">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> columns &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Sprintf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;, %s&amp;#34;&lt;/span>, t.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).Name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> values &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> fmt.&lt;span style="color:#d2a8ff;font-weight:bold">Sprintf&lt;/span>(&lt;span style="color:#a5d6ff">&amp;#34;, &amp;#39;%s&amp;#39;&amp;#34;&lt;/span>, v.&lt;span style="color:#d2a8ff;font-weight:bold">Field&lt;/span>(i).&lt;span style="color:#d2a8ff;font-weight:bold">String&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> columns &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;); &amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> values &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> &lt;span style="color:#a5d6ff">&amp;#34;); &amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sql &lt;span style="color:#ff7b72;font-weight:bold">+=&lt;/span> columns &lt;span style="color:#ff7b72;font-weight:bold">+&lt;/span> values
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">return&lt;/span> sql
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//output: insert into student(name, age); values (&amp;#39;go&amp;#39;, 16);
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/golang/reflect/ - okrust所有</description></item><item><title>Kubenets in Action cli</title><link>https://www.okrust.com/posts/kubenets-in-action/</link><pubDate>Fri, 05 May 2023 16:33:24 +0800</pubDate><guid>https://www.okrust.com/posts/kubenets-in-action/</guid><description>okrust https://www.okrust.com/posts/kubenets-in-action/ -&lt;h1 id="常用指令">常用指令&lt;/h1>
 &lt;blockquote>
 &lt;p>学习中文档不全,慢慢整理&amp;hellip;..&lt;/p>
 &lt;p>所有资源来自 kubernets in action，只折抄个人需要的&lt;/p>
@@ -977,4 +1128,6 @@ pod&lt;/li>
 &lt;p>这里只列出常用的几个&lt;/p>
 &lt;p>更多请点击 &lt;a href="https://mirrors.ustc.edu.cn/help/">USTC Mirror&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.ustc.edu.cn/help/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/mirrors/ - okrust所有</description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/mirrors/ - okrust所有</description></item><item><title>Hello</title><link>https://www.okrust.com/posts/hello/</link><pubDate>Tue, 28 Mar 2023 11:04:02 +0800</pubDate><guid>https://www.okrust.com/posts/hello/</guid><description>okrust https://www.okrust.com/posts/hello/ -&lt;h1 id="hello-hugo">hello hugo&lt;/h1>
+&lt;p>hello okrust&lt;/p>
+- https://www.okrust.com/posts/hello/ - okrust所有</description></item></channel></rss>
