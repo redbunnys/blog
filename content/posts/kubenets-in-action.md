@@ -822,3 +822,88 @@ kubectl edit  rc  kubia
        app: kubia
      template:
    ~~~
+  2.  缩容
+      查看当前rc
+
+      ~~~bash
+      #查看
+      kuvectl get rc
+      #缩容
+      kubectl scale rc kubia --replicas=3
+      ~~~
+
+伸缩集群的声明式方法
+在 Kubernetes 中水平伸缩 pod 是陈述式的：＂我想要运行 x 个实例。”你不是告
+诉 Kubernetes 做什么或如何去做， 只是指定了期望的状态。
+
+#### 4.2.7 删除一个ReplicationControlle
+
+默认删除 `ReplicationController` 会删除同时关联的pod，有时候只要删除，添加 `--cascade=false`  保持  `ReplicationController` 删除，pod存活
+
+~~~bash
+
+kubectl delele rc kubia --cascade=false
+
+# 使用这个
+kubectl delete rc kubia --cascade=orphan
+~~~
+> ~~kubectl delele rc kubia --cascade=false~~ 已经被弃用
+>
+>  warning: --cascade=false is deprecated (boolean value) and can be replaced with --cascade=orphan
+
+
+### 4.3 使用 
+
+最 初， ReplicationController 是用于复制和在异常时重新调度节点的唯 一
+Kubemetes 组件， 后来又引入了 一个名为 ReplicaSet 的类似资 源 。 它是新 一 代的
+ReplicationController, 并且将 其完全替换掉 (ReplicationController 最终将被弃用）。
+
+#### 4.3.1 比较ReplicaSet禾r:l ReplicationController
+
+- ReplicaSet 的行为与ReplicationController 完全相同， 但pod 选择器的表达能力
+更强。 虽然 ReplicationController 的标签选择器只允许包含某个标签的匹配 pod, 但
+ReplicaSet 的选择器还允许匹配缺少某个标签的 pod, 或包含特定标签名的 pod, 不
+管其值如何。
+- 另外， 举个例子， 单个 Repli氓ionController 无法将 pod 与标签 env=produc巨on
+和 env= devel 同时匹 配。 它只能匹 配带有 env=devel 标 签 的 pod 或带有
+env= devel 标签的 pod。 但是 一个 ReplicaSet 可以匹配两组 pod 并将它们视为一个
+大组。
+- 同样， 无论ReplicationController 的值如何， ReplicationController 都无法仅千
+标签名的存在来匹配 pod, 而ReplicaSet 则可以。 例如， ReplicaSet 可匹配所有包含
+名为 env 的标签的 pod, 无论ReplicaSet 的实际值是什么（可以理解为 env= *)。
+
+#### 4.3.2 定义ReplicaSet
+
+ 我使用的版本是  `v1.23.9`,书籍可能是老版本，beta功能
+~~~yaml
+apiVersion: apps/v1  不是v1 版本 API的一部分，但属于 apps API组的v1beta2版本
+kind: ReplicaSet
+metadata:
+  name: kubia
+spec:
+  replicas: 3
+  selector:
+    matchLabels:  # 这里使用了更简单的matchlabels选择器，类似于 ReplicationController的选择器
+      app: kubia
+  template:
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+      - name: kubia
+        image: luksa/kubia
+~~~
+
+
+#### 4.3.3 创建和检查ReplicaSe
+
+查看
+~~~bash
+kubectl get rs 
+~~~
+
+查看详细
+~~~bash
+kubbectl  describe rs
+~~~
