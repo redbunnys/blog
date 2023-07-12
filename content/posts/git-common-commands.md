@@ -5,7 +5,7 @@ description: "git常用的指令"
 featured_image: "https://w.wallhaven.cc/full/85/wallhaven-853jeo.jpg"
 comment : false
 hidden: false
-draft: true
+draft: false
 tags: ["git"]
 Categories: "git"
 ---
