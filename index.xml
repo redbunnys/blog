@@ -872,7 +872,40 @@ env= devel 标签的 pod。 但是 一个 ReplicaSet 可以匹配两组 pod 并�
 &lt;pre tabindex="0">&lt;code>rm -f /etc/cni/net.d/*flannel*
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;/ol>
-- https://www.okrust.com/posts/kubernets/ - okrust所有</description></item><item><title>Openwrt主路由使用端口回流失效</title><link>https://www.okrust.com/posts/openwrt-nat/</link><pubDate>Mon, 10 Apr 2023 16:09:04 +0800</pubDate><guid>https://www.okrust.com/posts/openwrt-nat/</guid><description>okrust https://www.okrust.com/posts/openwrt-nat/ -&lt;h2 id="openwrt-解决方法">Openwrt 解决方法&lt;/h2>
+- https://www.okrust.com/posts/kubernets/ - okrust所有</description></item><item><title>git常用的指令</title><link>https://www.okrust.com/posts/git-common-commands/</link><pubDate>Mon, 10 Apr 2023 16:25:30 +0800</pubDate><guid>https://www.okrust.com/posts/git-common-commands/</guid><description>okrust https://www.okrust.com/posts/git-common-commands/ -&lt;h2 id="更新子仓库">更新子仓库&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git submodule update --init --recursive
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>git init 用于初始化本地仓库&lt;/li>
+&lt;li>git add . 添加本地仓库的所有文件&lt;/li>
+&lt;li>git commit -m ‘commit message’ 保存你对这些文件所做的更改&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://www.freecodecamp.org/news/content/images/2022/09/ss1-2.png" alt="">&lt;/p>
+&lt;p>要推送 main 仓库，你首先必须通过运行 &lt;code>git remote add &amp;lt;url&amp;gt;&lt;/code> 将远程服务器添加到 Git。&lt;/p>
+&lt;p>要确认已添加远程，请运行 &lt;code>git remote -v &lt;/code>&lt;/p>
+&lt;p>&lt;a href="https://www.freecodecamp.org/news/content/images/2022/09/ss2-2.png">&lt;img src="" alt="">&lt;/a>&lt;/p>
+&lt;p>推送到远程分支&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>推送当前分支 &lt;code>git push&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>创建新的分支,推送并远程仓库产生新的分支&lt;/p>
+&lt;ol>
+&lt;li>先运行 &lt;code>git branch branch-name&lt;/code> 创建新分支。 运行 &lt;code>git switch branch-name&lt;/code> 或 &lt;code>git checkout branch-name&lt;/code> 切到新建分支运行。
+或者 使用 &lt;code>git checkout -b branch-name&lt;/code> 创建并切到当前分支。&lt;/li>
+&lt;li>要将分支推送到远程服务器，请运行 &lt;code>git push –u origin&lt;/code>。就我而言，该分支的名称是 &lt;code>bug-fixes&lt;/code>，所以，我需要运行 &lt;code>git push -u origin bug-&lt;/code>fixes`
+&lt;img src="https://www.freecodecamp.org/news/content/images/2022/09/ss4-2.png" alt="">&lt;/li>
+&lt;li>成功远程新建分支&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;img src="https://www.freecodecamp.org/news/content/images/2022/09/ss5-2.png" alt="">&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>原文地址: &lt;a href="https://www.freecodecamp.org/chinese/news/git-push-local-branch-to-remote-how-to-publish-a-new-branch-in-git/">https://www.freecodecamp.org/chinese/news/git-push-local-branch-to-remote-how-to-publish-a-new-branch-in-git/&lt;/a>&lt;/p>
+&lt;/blockquote>
+- https://www.okrust.com/posts/git-common-commands/ - okrust所有</description></item><item><title>Openwrt主路由使用端口回流失效</title><link>https://www.okrust.com/posts/openwrt-nat/</link><pubDate>Mon, 10 Apr 2023 16:09:04 +0800</pubDate><guid>https://www.okrust.com/posts/openwrt-nat/</guid><description>okrust https://www.okrust.com/posts/openwrt-nat/ -&lt;h2 id="openwrt-解决方法">Openwrt 解决方法&lt;/h2>
 &lt;ol>
 &lt;li>
 &lt;p>ssh连接openwrt系统后，编辑/etc/sysctl.d/11-br-netfilter.conf文件。&lt;/p>
