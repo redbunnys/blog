@@ -1,4 +1,199 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>okrust所有</copyright><lastBuildDate>Thu, 25 May 2023 13:53:24 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>go 反射简单使用(Reflect)</title><link>https://www.okrust.com/posts/golang/reflect/</link><pubDate>Thu, 25 May 2023 13:53:24 +0800</pubDate><guid>https://www.okrust.com/posts/golang/reflect/</guid><description>okrust https://www.okrust.com/posts/golang/reflect/ -&lt;h1 id="反射">反射&lt;/h1>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>okrust</title><link>https://www.okrust.com/</link><description>Recent content on okrust</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>okrust所有</copyright><lastBuildDate>Thu, 10 Aug 2023 12:16:10 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>linux service编写</title><link>https://www.okrust.com/posts/linux/services/</link><pubDate>Thu, 10 Aug 2023 12:16:10 +0800</pubDate><guid>https://www.okrust.com/posts/linux/services/</guid><description>okrust https://www.okrust.com/posts/linux/services/ -&lt;h2 id="编写脚本">编写脚本&lt;/h2>
+&lt;p>示例:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>Unit&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">Description&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>hugo test
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">After&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>network.target
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>Service&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">Type&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>simple
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">User&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">Group&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">WorkingDirectory&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>/home/xxxx/code/blog
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">KillMode&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>control-group
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">Restart&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>no
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">ExecStart&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>hugo server -D
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>Install&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">WantedBy&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>multi-user.target &lt;span style="color:#8b949e;font-style:italic"># 多用户&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看见服务的&lt;code>Target&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#执行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ls -ratl /etc/systemd/system | grep wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">#输出&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月24日 05:20 getty.target.wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月24日 05:26 sysinit.target.wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月24日 05:26 graphical.target.wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月24日 05:26 bluetooth.target.wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月24日 05:26 printer.target.wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月24日 05:26 systemd-coredump@.service.wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月24日 05:26 network-online.target.wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月24日 09:02 sockets.target.wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月27日 06:09 timers.target.wants
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>drwxr-xr-x &lt;span style="color:#a5d6ff">2&lt;/span> root root &lt;span style="color:#a5d6ff">4096&lt;/span> 8月27日 06:09 multi-user.target.wants
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="模块解释">模块解释&lt;/h3>
+&lt;p>[Unit]区块：启动顺序与依赖关系&lt;/p>
+&lt;h4 id="服务描述">服务描述：&lt;/h4>
+&lt;ul>
+&lt;li>Description：给出当前服务的简单描述&lt;/li>
+&lt;li>Documentation：给出文档位置&lt;/li>
+&lt;/ul>
+&lt;h4 id="启动顺序">启动顺序：&lt;/h4>
+&lt;ul>
+&lt;li>After：定义xxx.service应该在哪些target或service服务之后启动&lt;/li>
+&lt;li>Before：定义xxx.service应该在哪些target或service服务之前启动&lt;/li>
+&lt;/ul>
+&lt;h4 id="依赖关系">依赖关系：&lt;/h4>
+&lt;ul>
+&lt;li>Wants：表示xxx.service与定义的服务存在“弱依赖”关系，即指定的服务启动失败或停止运行不影响xxx的允行&lt;/li>
+&lt;li>Requires：则表示”强依赖”关系，即指定服务启动失败或异常退出，那么xxx也必须退出；反之xxx启动则指定服务也会启动&lt;/li>
+&lt;/ul>
+&lt;h3 id="service区块启动行为定义">[Service]区块：启动行为定义&lt;/h3>
+&lt;h4 id="启动命令">启动命令：&lt;/h4>
+&lt;ul>
+&lt;li>EnvironmentFile：指定当前服务的环境参数文件(路径)，如EnviromentFile=-/etc/sysconfig/xxx，连词号表示抑制错误，即发生错误时，不影响其他命令的执行&lt;/li>
+&lt;li>Environment：后面接多个不同的shell变量，如Environment=DATA_DIR=/dir/data&lt;/li>
+&lt;li>User：设置服务运行的用户&lt;/li>
+&lt;li>Group：设置服务运行的用户组&lt;/li>
+&lt;li>WorkingDirectory：设置服务运行的路径&lt;/li>
+&lt;li>Exec*：各种与执行相关的命令
+&lt;ul>
+&lt;li>ExecStart：定义启动服务时执行的命令&lt;/li>
+&lt;li>ExecStop：定义停止服务时执行的命令&lt;/li>
+&lt;li>ExecStartPre：定义启动服务前执行的命令&lt;/li>
+&lt;li>ExecStartPost：定义启动服务后执行的命令&lt;/li>
+&lt;li>ExecStopPost：定义停止服务后执行的命令&lt;/li>
+&lt;li>ExecReload：定义重启服务时执行的命令&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="启动类型">启动类型：&lt;/h4>
+&lt;ul>
+&lt;li>Type：字段定义启动类型，可以设置的值如下
+&lt;ul>
+&lt;li>simple（默认值）：ExecStart字段启动的进程为主进程，即直接启动服务进程&lt;/li>
+&lt;li>forking：ExecStart字段将以fork()方式启动，此时父进程将会退出，子进程将成为主进程（例如用shell脚本启动服务进程）&lt;/li>
+&lt;li>oneshot：类似于simple，但只执行一次，Systemd 会等它执行完，才启动其他服务&lt;/li>
+&lt;li>dbus：类似于simple，但会等待 D-Bus 信号后启动&lt;/li>
+&lt;li>notify：类似于simple，启动结束后会发出通知信号，然后 Systemd 再启动其他服务&lt;/li>
+&lt;li>idle：类似于simple，但是要等到其他任务都执行完，才会启动该服务。一种使用场合是为让该服务的输出，不与其他服务的输出相混合&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>RemainAfterExit：设为yes，表示进程退出以后，服务仍然保持执行&lt;/li>
+&lt;/ul>
+&lt;h3 id="重启行为">重启行为：&lt;/h3>
+&lt;ul>
+&lt;li>KillMode：定义 Systemd 如何停止服务，可以设置的值如下
+&lt;ul>
+&lt;li>control-group（default）：当前控制组里面的所有子进程，都会被杀掉&lt;/li>
+&lt;li>process：只杀主进程&lt;/li>
+&lt;li>mixed：主进程将收到 SIGTERM 信号，子进程收到 SIGKILL 信号&lt;/li>
+&lt;li>none：没有进程会被杀掉，只是执行服务的 stop 命令&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Restart：定义了服务退出后，Systemd 的重启方式，可以设置的值如下（对于守护进程，推荐设为on-failure。对于那些允许发生错误退出的服务，可以设为on-abnormal）
+&lt;ul>
+&lt;li>no（default）：退出后不会重启&lt;/li>
+&lt;li>on-success：只有正常退出时（退出状态码为0），才会重启&lt;/li>
+&lt;li>on-failure：非正常退出时（退出状态码非0），包括被信号终止和超时，才会重启&lt;/li>
+&lt;li>on-abnormal：只有被信号终止和超时，才会重启&lt;/li>
+&lt;li>on-abort：只有在收到没有捕捉到的信号终止时，才会重启&lt;/li>
+&lt;li>on-watchdog：超时退出，才会重启&lt;/li>
+&lt;li>always：不管是什么退出原因，总是重启&lt;/li>
+&lt;li>RestartSec：表示 Systemd 重启服务之前，需要等待的秒数&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="install区块服务安装定义">[Install]区块：服务安装定义&lt;/h3>
+&lt;ul>
+&lt;li>WantedBy：表示该服务所在的 Target&lt;/li>
+&lt;/ul>
+&lt;p>Target的含义是服务组，如WantedBy=multi-user.target指的是该服务所属于multi-user.target。当执行systemctl enable xxx.service命令时，xxx.service的符号链接就会被创建在/etc/systemd/system/multi-user.target目录下。&lt;/p>
+&lt;p>可以通过systemctl get-default命令查看系统默认启动的target，一般为multi-user或者是graphical。因此配置好相应的WantedBy字段，可以实现服务的开机启动&lt;/p>
+&lt;h3 id="推荐执行">推荐执行&lt;/h3>
+&lt;ul>
+&lt;li>如果是shell 启动 service-&amp;gt;Type:forking&lt;/li>
+&lt;li>二进制启动 service-&amp;gt;Type:simple&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;a href="https://qgrain.github.io/2020/05/12/%E7%BC%96%E5%86%99systemd%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/">参考文档1&lt;/a>&lt;/p>
+&lt;/blockquote>
+- https://www.okrust.com/posts/linux/services/ - okrust所有</description></item><item><title>linux权限快速了解</title><link>https://www.okrust.com/posts/linux/permissions/</link><pubDate>Mon, 07 Aug 2023 15:16:10 +0800</pubDate><guid>https://www.okrust.com/posts/linux/permissions/</guid><description>okrust https://www.okrust.com/posts/linux/permissions/ -&lt;h2 id="linux权限">linux权限&lt;/h2>
+&lt;h3 id="文件权限">文件权限&lt;/h3>
+&lt;p>基本的权限表示
+&lt;img src="https://www.okrust.com/linux/permissions.jpg" alt="权限">&lt;/p>
+&lt;p>文件类型分几种：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-&lt;/code> 则表示文件&lt;/li>
+&lt;li>&lt;code>l&lt;/code> 则表示链接文件，&lt;/li>
+&lt;li>&lt;code>b&lt;/code> 则表示设备文件中的可随机存取设备，&lt;/li>
+&lt;li>&lt;code>c&lt;/code> 则表示为设备文件中的一次性读取设备(键盘、鼠标)。&lt;/li>
+&lt;/ul>
+&lt;h3 id="改变系统权限和属性">改变系统权限和属性&lt;/h3>
+&lt;p>我们现在知道文件权限对于一个系统安全的重要性了，现在就要聊一聊如何修改文件权限了。常用的修改文件权限的指令有&lt;/p>
+&lt;ul>
+&lt;li>chgrp ：改变文件所属群组&lt;/li>
+&lt;li>chown：改变文件所有者&lt;/li>
+&lt;li>chmod：改变文件权限&lt;/li>
+&lt;/ul>
+&lt;h4 id="chgrp">chgrp&lt;/h4>
+&lt;p>chgrp 就是 change group 的缩写，我觉得李纳斯把缩写用到了极致，这也许是我们现在对于缩写这么流行的原因。chgrp 能够改变文件群组，不过，要改变群组的话，要被改变的群组名称要在 /etc/group 文件内存在才行，否则就会显示错误。&lt;/p>
+&lt;h4 id="chown">chown&lt;/h4>
+&lt;p>既然 chgrp 能够改变文件群组，那么 chown 能够改变文件所有者，同样也需要注意的是，文件所有者必须是系统中存在的账号，也就是在 /etc/passwd 这个文件中有记录的使用者名称才可改变。除此之外，chown 还可以直接修改群组名称。&lt;/p>
+&lt;p>语法:&lt;/p>
+&lt;blockquote>
+&lt;p>chown [可选项] user[:group] file&amp;hellip;&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>使用权限：root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>说明：
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>可选项&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span> : 同上文chmod
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>user : 新的文件拥有者的使用者
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>group : 新的文件拥有者的使用者群体&lt;span style="color:#ff7b72;font-weight:bold">(&lt;/span>group&lt;span style="color:#ff7b72;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>示例:&lt;/p>
+&lt;ul>
+&lt;li>置文件 d.key、e.scrt的拥有者设为 users 群体的 ubuntu&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>chown ubuntu:users file d.key e.scrt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>设置当前目录下与子目录下的所有文件的拥有者为 users 群体的 James&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>chown -R James:users *
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="chmod">chmod&lt;/h4>
+&lt;p>变更文件权限使用的是 chmod 这个指令，但是，权限的设置有两种方式，可以分别使用数字或者符号进行权限变更。&lt;/p>
+&lt;p>使用数组修改权限
+如：&lt;/p>
+&lt;ul>
+&lt;li>rwx = 4 + 2 + 1 = 7&lt;/li>
+&lt;li>rw = 4 + 2 = 6&lt;/li>
+&lt;li>rx = 4 +1 = 5&lt;/li>
+&lt;/ul>
+&lt;p>即:&lt;/p>
+&lt;ul>
+&lt;li>若要同时设置 rwx (可读写运行） 权限则将该权限位 设置 为 4 + 2 + 1 = 7&lt;/li>
+&lt;li>若要同时设置 rw-（可读写不可运行）权限则将该权限位 设置 为 4 + 2 = 6&lt;/li>
+&lt;li>若要同时设置 r-x（可读可运行不可写）权限则将该权限位 设置 为 4 +1 = 5&lt;/li>
+&lt;/ul>
+&lt;p>上面我们提到，每个文件都可以针对三个粒度，设置不同的rwx(读写执行)权限。即我们可以用用三个8进制数字分别表示 拥有者 、群组 、其它组( u、 g 、o)的权限详情，并用chmod直接加三个8进制数字的方式直接改变文件权限。语法格式为 ：&lt;/p>
+&lt;blockquote>
+&lt;p>chmod &amp;lt;ugo&amp;gt; file&amp;hellip;&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>其中
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>u,g,o各为一个数字，分别代表User、Group、及Other的权限。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>相当于简化版的
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>chmod &lt;span style="color:#79c0ff">u&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>权限,g&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>权限,o&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>权限 file...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>而此处的权限将用8进制的数字来表示User、Group、及Other的读、写、执行权限
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>示例:&lt;/p>
+&lt;ul>
+&lt;li>设置所有人可以读写及执行&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>chmod &lt;span style="color:#a5d6ff">777&lt;/span> file &lt;span style="color:#ff7b72;font-weight:bold">(&lt;/span>等价于 chmod &lt;span style="color:#79c0ff">u&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>rwx,g&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>rwx,o&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>rwx file 或 chmod &lt;span style="color:#79c0ff">a&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>rwx file&lt;span style="color:#ff7b72;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>设置拥有者可读写，其他人不可读写执行&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>chmod &lt;span style="color:#a5d6ff">600&lt;/span> file &lt;span style="color:#ff7b72;font-weight:bold">(&lt;/span>等价于 chmod &lt;span style="color:#79c0ff">u&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>rw,g&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>---,o&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>--- file 或 chmod &lt;span style="color:#79c0ff">u&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>rw,go-rwx file &lt;span style="color:#ff7b72;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>参考文章: &lt;a href="https://blog.csdn.net/u013197629/article/details/73608613">https://blog.csdn.net/u013197629/article/details/73608613&lt;/a>&lt;/p>
+&lt;/blockquote>
+- https://www.okrust.com/posts/linux/permissions/ - okrust所有</description></item><item><title>go 反射简单使用(Reflect)</title><link>https://www.okrust.com/posts/golang/reflect/</link><pubDate>Thu, 25 May 2023 13:53:24 +0800</pubDate><guid>https://www.okrust.com/posts/golang/reflect/</guid><description>okrust https://www.okrust.com/posts/golang/reflect/ -&lt;h1 id="反射">反射&lt;/h1>
 &lt;blockquote>
 &lt;p>介绍基本使用，具体深入点击下面的链接&lt;/p>
 &lt;p>深入理解 :&lt;a href="https://draveness.me/golang/docs/part2-foundation/ch04-basic/golang-reflect/">点击跳转&lt;/a>&lt;/p>
