@@ -3,7 +3,7 @@ title: "git常用的指令"
 date: 2023-04-10T16:25:30+08:00
 description: "git常用的指令"
 featured_image: "https://w.wallhaven.cc/full/85/wallhaven-853jeo.jpg"
-comment : false
+comment : true
 hidden: false
 draft: false
 tags: ["git"]

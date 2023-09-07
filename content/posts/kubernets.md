@@ -3,7 +3,7 @@ title: "kubernets 部署"
 date: 2023-05-05T01:12:16+08:00
 description: "kubernets 部署,1.23.9版本目前遇到的坑"
 featured_image: "https://w.wallhaven.cc/full/1p/wallhaven-1pd1o9.jpg"
-comment : false
+comment : true
 hidden: false
 draft: false
 tags: ["kubernets"]

@@ -4,7 +4,7 @@ date: 2023-05-25T13:53:24+08:00
 draft: false
 description: "反射的简单使用"
 featured_image: "https://w.wallhaven.cc/full/5g/wallhaven-5g7ew7.jpg"
-comment : false
+comment : true
 hidden: false
 tags: ["reflect"]
 Categories: "go"

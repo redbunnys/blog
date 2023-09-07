@@ -2,10 +2,9 @@
 title: "Kubenets in Action cli"
 date: 2023-05-05T16:33:24+08:00
 draft: false
-
 description: "kubernets in action 所使用的的指令"
 featured_image: "https://w.wallhaven.cc/full/ex/wallhaven-ex9gwo.png"
-comment : false
+comment : true
 hidden: false
 tags: ["kubernets","linux"]
 Categories: "book"
