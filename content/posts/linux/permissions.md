@@ -1,6 +1,6 @@
 ---
 title: "linux权限快速了解"
-date: 2023-09-07T15:16:10+08:00
+date: 2023-08-07T15:16:10+08:00
 draft: false
 description: "linux权限快速了解"
 featured_image: "https://w.wallhaven.cc/full/l8/wallhaven-l83o92.jpg"
@@ -93,3 +93,5 @@ chmod 777 file  (等价于  chmod u=rwx,g=rwx,o=rwx file 或  chmod a=rwx file)
 ~~~bash
 chmod 600 file (等价于  chmod u=rw,g=---,o=--- file 或 chmod u=rw,go-rwx file )
 ~~~
+
+>参考文章: https://blog.csdn.net/u013197629/article/details/73608613
