@@ -1,6 +1,6 @@
 baseURL = 'https://www.okrust.com/'
 languageCode = 'zh-CN'
-title = 'okrust'
+title = 'redbunny'
 theme = 'diary'
 hasCJKLanguage = true
 paginate =  10
@@ -14,7 +14,7 @@ enableEmoji = false
 # 创建robots.txt，建议设置为true
 enableRobotsTXT = false
 
-copyright = "okrust所有"
+copyright = "湘ICP备2022010371号"
 
 # goole数据统计
 googleAnalytics = "G-GT370SNKC1"
