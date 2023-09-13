@@ -14,7 +14,7 @@ enableEmoji = false
 # 创建robots.txt，建议设置为true
 enableRobotsTXT = false
 
-copyright = "湘ICP备2022010371号"
+copyright = "2022-2023"
 
 # goole数据统计
 googleAnalytics = "G-GT370SNKC1"
