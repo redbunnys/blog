@@ -1,4 +1,4 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>redbunny</title><link>https://www.okrust.com/</link><description>Recent content on redbunny</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>湘ICP备2022010371号</copyright><lastBuildDate>Thu, 10 Aug 2023 12:16:10 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>linux service编写</title><link>https://www.okrust.com/posts/linux/services/</link><pubDate>Thu, 10 Aug 2023 12:16:10 +0800</pubDate><guid>https://www.okrust.com/posts/linux/services/</guid><description>redbunny https://www.okrust.com/posts/linux/services/ -&lt;h2 id="编写脚本">编写脚本&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>redbunny</title><link>https://www.okrust.com/</link><description>Recent content on redbunny</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>2022-2023</copyright><lastBuildDate>Thu, 10 Aug 2023 12:16:10 +0800</lastBuildDate><atom:link href="https://www.okrust.com/index.xml" rel="self" type="application/rss+xml"/><item><title>linux service编写</title><link>https://www.okrust.com/posts/linux/services/</link><pubDate>Thu, 10 Aug 2023 12:16:10 +0800</pubDate><guid>https://www.okrust.com/posts/linux/services/</guid><description>redbunny https://www.okrust.com/posts/linux/services/ -&lt;h2 id="编写脚本">编写脚本&lt;/h2>
 &lt;p>示例:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>Unit&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">Description&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>hugo test
@@ -116,7 +116,7 @@
 &lt;blockquote>
 &lt;p>&lt;a href="https://qgrain.github.io/2020/05/12/%E7%BC%96%E5%86%99systemd%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC/">参考文档1&lt;/a>&lt;/p>
 &lt;/blockquote>
-- https://www.okrust.com/posts/linux/services/ - 湘ICP备2022010371号</description></item><item><title>linux权限快速了解</title><link>https://www.okrust.com/posts/linux/permissions/</link><pubDate>Mon, 07 Aug 2023 15:16:10 +0800</pubDate><guid>https://www.okrust.com/posts/linux/permissions/</guid><description>redbunny https://www.okrust.com/posts/linux/permissions/ -&lt;h2 id="linux权限">linux权限&lt;/h2>
+- https://www.okrust.com/posts/linux/services/ - 2022-2023</description></item><item><title>linux权限快速了解</title><link>https://www.okrust.com/posts/linux/permissions/</link><pubDate>Mon, 07 Aug 2023 15:16:10 +0800</pubDate><guid>https://www.okrust.com/posts/linux/permissions/</guid><description>redbunny https://www.okrust.com/posts/linux/permissions/ -&lt;h2 id="linux权限">linux权限&lt;/h2>
 &lt;h3 id="文件权限">文件权限&lt;/h3>
 &lt;p>基本的权限表示
 &lt;img src="https://www.okrust.com/linux/permissions.jpg" alt="权限">&lt;/p>
@@ -193,7 +193,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>参考文章: &lt;a href="https://blog.csdn.net/u013197629/article/details/73608613">https://blog.csdn.net/u013197629/article/details/73608613&lt;/a>&lt;/p>
 &lt;/blockquote>
-- https://www.okrust.com/posts/linux/permissions/ - 湘ICP备2022010371号</description></item><item><title>go 反射简单使用(Reflect)</title><link>https://www.okrust.com/posts/golang/reflect/</link><pubDate>Thu, 25 May 2023 13:53:24 +0800</pubDate><guid>https://www.okrust.com/posts/golang/reflect/</guid><description>redbunny https://www.okrust.com/posts/golang/reflect/ -&lt;h1 id="反射">反射&lt;/h1>
+- https://www.okrust.com/posts/linux/permissions/ - 2022-2023</description></item><item><title>go 反射简单使用(Reflect)</title><link>https://www.okrust.com/posts/golang/reflect/</link><pubDate>Thu, 25 May 2023 13:53:24 +0800</pubDate><guid>https://www.okrust.com/posts/golang/reflect/</guid><description>redbunny https://www.okrust.com/posts/golang/reflect/ -&lt;h1 id="反射">反射&lt;/h1>
 &lt;blockquote>
 &lt;p>介绍基本使用，具体深入点击下面的链接&lt;/p>
 &lt;p>深入理解 :&lt;a href="https://draveness.me/golang/docs/part2-foundation/ch04-basic/golang-reflect/">点击跳转&lt;/a>&lt;/p>
@@ -344,7 +344,7 @@ ValueOf 主要获取变量的值&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ff7b72">return&lt;/span> sql
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8b949e;font-style:italic">//output: insert into student(name, age); values (&amp;#39;go&amp;#39;, 16);
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/golang/reflect/ - 湘ICP备2022010371号</description></item><item><title>Kubenets in Action cli</title><link>https://www.okrust.com/posts/kubenets-in-action/</link><pubDate>Fri, 05 May 2023 16:33:24 +0800</pubDate><guid>https://www.okrust.com/posts/kubenets-in-action/</guid><description>redbunny https://www.okrust.com/posts/kubenets-in-action/ -&lt;h1 id="常用指令">常用指令&lt;/h1>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/golang/reflect/ - 2022-2023</description></item><item><title>Kubenets in Action cli</title><link>https://www.okrust.com/posts/kubenets-in-action/</link><pubDate>Fri, 05 May 2023 16:33:24 +0800</pubDate><guid>https://www.okrust.com/posts/kubenets-in-action/</guid><description>redbunny https://www.okrust.com/posts/kubenets-in-action/ -&lt;h1 id="常用指令">常用指令&lt;/h1>
 &lt;blockquote>
 &lt;p>学习中文档不全,慢慢整理&amp;hellip;..&lt;/p>
 &lt;p>所有资源来自 kubernets in action，只折抄个人需要的&lt;/p>
@@ -984,7 +984,7 @@ env= devel 标签的 pod。 但是 一个 ReplicaSet 可以匹配两组 pod 并�
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get rs
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看详细&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubbectl describe rs
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/kubenets-in-action/ - 湘ICP备2022010371号</description></item><item><title>kubernets 部署</title><link>https://www.okrust.com/posts/kubernets/</link><pubDate>Fri, 05 May 2023 01:12:16 +0800</pubDate><guid>https://www.okrust.com/posts/kubernets/</guid><description>redbunny https://www.okrust.com/posts/kubernets/ -&lt;h1 id="kubernets-部署">Kubernets 部署&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/kubenets-in-action/ - 2022-2023</description></item><item><title>kubernets 部署</title><link>https://www.okrust.com/posts/kubernets/</link><pubDate>Fri, 05 May 2023 01:12:16 +0800</pubDate><guid>https://www.okrust.com/posts/kubernets/</guid><description>redbunny https://www.okrust.com/posts/kubernets/ -&lt;h1 id="kubernets-部署">Kubernets 部署&lt;/h1>
 &lt;blockquote>
 &lt;p>踩坑更新中&lt;/p>
 &lt;p>参考教程：&lt;a href="https://k8s.easydoc.net/docs/dRiQjyTY/28366845/6GiNOzyZ/nd7yOvdY">链接&lt;/a>&lt;/p>
@@ -1067,7 +1067,7 @@ env= devel 标签的 pod。 但是 一个 ReplicaSet 可以匹配两组 pod 并�
 &lt;pre tabindex="0">&lt;code>rm -f /etc/cni/net.d/*flannel*
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;/ol>
-- https://www.okrust.com/posts/kubernets/ - 湘ICP备2022010371号</description></item><item><title>git常用的指令</title><link>https://www.okrust.com/posts/git-common-commands/</link><pubDate>Mon, 10 Apr 2023 16:25:30 +0800</pubDate><guid>https://www.okrust.com/posts/git-common-commands/</guid><description>redbunny https://www.okrust.com/posts/git-common-commands/ -&lt;h2 id="更新子仓库">更新子仓库&lt;/h2>
+- https://www.okrust.com/posts/kubernets/ - 2022-2023</description></item><item><title>git常用的指令</title><link>https://www.okrust.com/posts/git-common-commands/</link><pubDate>Mon, 10 Apr 2023 16:25:30 +0800</pubDate><guid>https://www.okrust.com/posts/git-common-commands/</guid><description>redbunny https://www.okrust.com/posts/git-common-commands/ -&lt;h2 id="更新子仓库">更新子仓库&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git submodule update --init --recursive
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>git init 用于初始化本地仓库&lt;/li>
@@ -1100,7 +1100,7 @@ env= devel 标签的 pod。 但是 一个 ReplicaSet 可以匹配两组 pod 并�
 &lt;blockquote>
 &lt;p>原文地址: &lt;a href="https://www.freecodecamp.org/chinese/news/git-push-local-branch-to-remote-how-to-publish-a-new-branch-in-git/">https://www.freecodecamp.org/chinese/news/git-push-local-branch-to-remote-how-to-publish-a-new-branch-in-git/&lt;/a>&lt;/p>
 &lt;/blockquote>
-- https://www.okrust.com/posts/git-common-commands/ - 湘ICP备2022010371号</description></item><item><title>Openwrt主路由使用端口回流失效</title><link>https://www.okrust.com/posts/openwrt-nat/</link><pubDate>Mon, 10 Apr 2023 16:09:04 +0800</pubDate><guid>https://www.okrust.com/posts/openwrt-nat/</guid><description>redbunny https://www.okrust.com/posts/openwrt-nat/ -&lt;h2 id="openwrt-解决方法">Openwrt 解决方法&lt;/h2>
+- https://www.okrust.com/posts/git-common-commands/ - 2022-2023</description></item><item><title>Openwrt主路由使用端口回流失效</title><link>https://www.okrust.com/posts/openwrt-nat/</link><pubDate>Mon, 10 Apr 2023 16:09:04 +0800</pubDate><guid>https://www.okrust.com/posts/openwrt-nat/</guid><description>redbunny https://www.okrust.com/posts/openwrt-nat/ -&lt;h2 id="openwrt-解决方法">Openwrt 解决方法&lt;/h2>
 &lt;ol>
 &lt;li>
 &lt;p>ssh连接openwrt系统后，编辑/etc/sysctl.d/11-br-netfilter.conf文件。&lt;/p>
@@ -1123,7 +1123,7 @@ env= devel 标签的 pod。 但是 一个 ReplicaSet 可以匹配两组 pod 并�
 &lt;ul>
 &lt;li>&lt;a href="http://www.kennylife.cn/index.php/x86_router/openwrt-NAT.html">http://www.kennylife.cn/index.php/x86_router/openwrt-NAT.html&lt;/a>&lt;/li>
 &lt;/ul>
-- https://www.okrust.com/posts/openwrt-nat/ - 湘ICP备2022010371号</description></item><item><title>hugo github Action 部署</title><link>https://www.okrust.com/posts/gitaction/</link><pubDate>Wed, 29 Mar 2023 15:05:16 +0800</pubDate><guid>https://www.okrust.com/posts/gitaction/</guid><description>redbunny https://www.okrust.com/posts/gitaction/ -&lt;h1 id="github配置">Github配置&lt;/h1>
+- https://www.okrust.com/posts/openwrt-nat/ - 2022-2023</description></item><item><title>hugo github Action 部署</title><link>https://www.okrust.com/posts/gitaction/</link><pubDate>Wed, 29 Mar 2023 15:05:16 +0800</pubDate><guid>https://www.okrust.com/posts/gitaction/</guid><description>redbunny https://www.okrust.com/posts/gitaction/ -&lt;h1 id="github配置">Github配置&lt;/h1>
 &lt;h2 id="进入自己的仓库">进入自己的仓库&lt;/h2>
 &lt;p>打开 setting -&amp;gt; Actions -&amp;gt; General, 找到 &lt;code>Workflow permissions&lt;/code>,选中 &lt;code>Read and write permissions&lt;/code>, 点击&lt;code>save&lt;/code>保存
 &lt;img src="https://www.okrust.com/2023-03-29_14-37.png" alt=" 步骤1">
@@ -1196,7 +1196,7 @@ env= devel 标签的 pod。 但是 一个 ReplicaSet 可以匹配两组 pod 并�
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff"> echo $RSYNC_PWD &amp;gt; rsync.pwd
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff"> sudo chmod 600 rsync.pwd
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a5d6ff"> rsync -avP --delete public/* --password-file=rsync.pwd myblog@[ip]::blog&lt;/span>&lt;span style="color:#6e7681">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/gitaction/ - 湘ICP备2022010371号</description></item><item><title>国内镜像站</title><link>https://www.okrust.com/posts/mirrors/</link><pubDate>Wed, 29 Mar 2023 11:07:16 +0800</pubDate><guid>https://www.okrust.com/posts/mirrors/</guid><description>redbunny https://www.okrust.com/posts/mirrors/ -&lt;h3 id="镜像源">镜像源&lt;/h3>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/gitaction/ - 2022-2023</description></item><item><title>国内镜像站</title><link>https://www.okrust.com/posts/mirrors/</link><pubDate>Wed, 29 Mar 2023 11:07:16 +0800</pubDate><guid>https://www.okrust.com/posts/mirrors/</guid><description>redbunny https://www.okrust.com/posts/mirrors/ -&lt;h3 id="镜像源">镜像源&lt;/h3>
 &lt;p>&lt;a href="https://mirrors.tuna.tsinghua.edu.cn/">清华源&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.tuna.tsinghua.edu.cn/
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://mirrors.huaweicloud.com/home">华为镜像源&lt;/a>&lt;/p>
@@ -1420,6 +1420,6 @@ env= devel 标签的 pod。 但是 一个 ReplicaSet 可以匹配两组 pod 并�
 &lt;p>这里只列出常用的几个&lt;/p>
 &lt;p>更多请点击 &lt;a href="https://mirrors.ustc.edu.cn/help/">USTC Mirror&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#c9d1d9;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>https://mirrors.ustc.edu.cn/help/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/mirrors/ - 湘ICP备2022010371号</description></item><item><title>Hello</title><link>https://www.okrust.com/posts/hello/</link><pubDate>Tue, 28 Mar 2023 11:04:02 +0800</pubDate><guid>https://www.okrust.com/posts/hello/</guid><description>redbunny https://www.okrust.com/posts/hello/ -&lt;h1 id="hello-hugo">hello hugo&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://www.okrust.com/posts/mirrors/ - 2022-2023</description></item><item><title>Hello</title><link>https://www.okrust.com/posts/hello/</link><pubDate>Tue, 28 Mar 2023 11:04:02 +0800</pubDate><guid>https://www.okrust.com/posts/hello/</guid><description>redbunny https://www.okrust.com/posts/hello/ -&lt;h1 id="hello-hugo">hello hugo&lt;/h1>
 &lt;p>hello okrust&lt;/p>
-- https://www.okrust.com/posts/hello/ - 湘ICP备2022010371号</description></item></channel></rss>
+- https://www.okrust.com/posts/hello/ - 2022-2023</description></item></channel></rss>
