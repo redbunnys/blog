@@ -12,6 +12,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">KillMode&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>control-group
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">Restart&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>no
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">ExecStart&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>hugo server -D
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">StandardOutput&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>file:/path/to/service.log
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">StandardError&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>file:/path/to/error.log
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ff7b72;font-weight:bold">[&lt;/span>Install&lt;span style="color:#ff7b72;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#79c0ff">WantedBy&lt;/span>&lt;span style="color:#ff7b72;font-weight:bold">=&lt;/span>multi-user.target &lt;span style="color:#8b949e;font-style:italic"># 多用户&lt;/span>
@@ -99,6 +101,12 @@
 &lt;li>on-watchdog：超时退出，才会重启&lt;/li>
 &lt;li>always：不管是什么退出原因，总是重启&lt;/li>
 &lt;li>RestartSec：表示 Systemd 重启服务之前，需要等待的秒数&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>StandardOutput: 输出程序正常日志&lt;/li>
+&lt;li>StandardError: 输出程序错误日志
+&lt;ul>
+&lt;li>file:/path/xx.log：以文件形式保存&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
