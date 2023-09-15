@@ -26,6 +26,8 @@ WorkingDirectory=/home/xxxx/code/blog
 KillMode=control-group  
 Restart=no        
 ExecStart=hugo server -D   
+StandardOutput=file:/path/to/service.log
+StandardError=file:/path/to/error.log
    
 [Install]   
 WantedBy=multi-user.target  # 多用户
@@ -103,6 +105,9 @@ drwxr-xr-x  2 root root 4096  8月27日 06:09 multi-user.target.wants
     - on-watchdog：超时退出，才会重启
     - always：不管是什么退出原因，总是重启
     - RestartSec：表示 Systemd 重启服务之前，需要等待的秒数
+- StandardOutput: 输出程序正常日志
+- StandardError: 输出程序错误日志
+    - file:/path/xx.log：以文件形式保存
 ### [Install]区块：服务安装定义
 - WantedBy：表示该服务所在的 Target
 
