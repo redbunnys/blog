@@ -47,4 +47,4 @@ jobs:
           port: ${{ secrets.BLOG_PORT }}
           key: ${{ secrets.BLOG_KEY }}
           source: public/*
-          target: /data/www/blog/
+          target: ${{ secrets.BLOG_DESC }}
