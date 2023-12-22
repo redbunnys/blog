@@ -46,4 +46,4 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           source: public/*
-          target: /var/www/hugo
+          target: /data/www/blog/
