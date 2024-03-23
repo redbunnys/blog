@@ -31,3 +31,12 @@ Categories: "openwrt"
 ## 方法来源
 
  - http://www.kennylife.cn/index.php/x86_router/openwrt-NAT.html
+
+## 旁路由设置完成，主路由WiFi无法上网
+
+1. ssh主路由，设置
+    `echo 0 > /proc/sys/net/bridge/bridge-nf-call-iptables`
+    `echo 0 > /proc/sys/net/bridge/bridge-nf-call-ip6tables`
+    `echo 0 > /proc/sys/net/bridge/bridge-nf-call-arptables`
+    `echo 0 > /proc/sys/net/bridge/bridge-nf-call-custom`
+>旁路由不用操作

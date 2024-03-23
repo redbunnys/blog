@@ -31,13 +31,13 @@ jobs:
           publish_dir: ./public  # 注意是hugo的public文件夹
           cname: www.okrust.com # cname
           
-      - name: Deploy to VPS
-        env: 
-          RSYNC_PWD: ${{ secrets.RSYNC_PASSWORD }}
-        run: |
-          echo $RSYNC_PWD > rsync.pwd
-          sudo chmod 600 rsync.pwd
-          rsync -avP --delete public/*   --password-file=rsync.pwd myblog@okrust.com::blog
+      #- name: Deploy to VPS
+      #  env: 
+      #    RSYNC_PWD: ${{ secrets.RSYNC_PASSWORD }}
+      #  run: |
+      #    echo $RSYNC_PWD > rsync.pwd
+      #    sudo chmod 600 rsync.pwd
+      #    rsync -avP --delete public/*   --password-file=rsync.pwd myblog@okrust.com::blog
 
       - name: Upload Files to Server
         uses: appleboy/scp-action@v0.1.4
