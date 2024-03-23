@@ -1131,6 +1131,17 @@ env= devel 标签的 pod。 但是 一个 ReplicaSet 可以匹配两组 pod 并�
 &lt;ul>
 &lt;li>&lt;a href="http://www.kennylife.cn/index.php/x86_router/openwrt-NAT.html">http://www.kennylife.cn/index.php/x86_router/openwrt-NAT.html&lt;/a>&lt;/li>
 &lt;/ul>
+&lt;h2 id="旁路由设置完成主路由wifi无法上网">旁路由设置完成，主路由WiFi无法上网&lt;/h2>
+&lt;ol>
+&lt;li>ssh主路由，设置
+&lt;code>echo 0 &amp;gt; /proc/sys/net/bridge/bridge-nf-call-iptables&lt;/code>
+&lt;code>echo 0 &amp;gt; /proc/sys/net/bridge/bridge-nf-call-ip6tables&lt;/code>
+&lt;code>echo 0 &amp;gt; /proc/sys/net/bridge/bridge-nf-call-arptables&lt;/code>
+&lt;code>echo 0 &amp;gt; /proc/sys/net/bridge/bridge-nf-call-custom&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>旁路由不用操作&lt;/p>
+&lt;/blockquote>
 - https://www.okrust.com/posts/openwrt-nat/ - 2022-2023</description></item><item><title>hugo github Action 部署</title><link>https://www.okrust.com/posts/gitaction/</link><pubDate>Wed, 29 Mar 2023 15:05:16 +0800</pubDate><guid>https://www.okrust.com/posts/gitaction/</guid><description>redbunny https://www.okrust.com/posts/gitaction/ -&lt;h1 id="github配置">Github配置&lt;/h1>
 &lt;h2 id="进入自己的仓库">进入自己的仓库&lt;/h2>
 &lt;p>打开 setting -&amp;gt; Actions -&amp;gt; General, 找到 &lt;code>Workflow permissions&lt;/code>,选中 &lt;code>Read and write permissions&lt;/code>, 点击&lt;code>save&lt;/code>保存
