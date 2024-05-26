@@ -1,7 +1,7 @@
 baseURL = 'https://www.okrust.com/'
 languageCode = 'zh-CN'
 title = 'redbunny'
-theme = 'diary'
+theme = 'themesdiary'
 hasCJKLanguage = true
 paginate =  10
 paginatePath = "page"
