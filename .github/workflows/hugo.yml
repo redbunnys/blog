@@ -1,50 +1,50 @@
-name: github pages
+# name: github pages
 
-on:
-  push:
-    branches:
-      - main  # 这里是提交到master分支就立即触发job
-  pull_request:
+# on:
+#   push:
+#     branches:
+#       - main  # 这里是提交到master分支就立即触发job
+#   pull_request:
 
-jobs:
-  deploy: 
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+# jobs:
+#   deploy: 
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - uses: actions/checkout@v2
+#         with:
+#           submodules: true  # Fetch Hugo themes (true OR recursive)
+#           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.111.2' 
-          extended: true 
+#       - name: Setup Hugo
+#         uses: peaceiris/actions-hugo@v2
+#         with:
+#           hugo-version: '0.111.2' 
+#           extended: true 
 
-      - name: Build
-        run: hugo --minify
+#       - name: Build
+#         run: hugo --minify
 
-      - name: Deploy Github
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # 这里不用动, 默认就好
-          publish_dir: ./public  # 注意是hugo的public文件夹
-          cname: www.okrust.com # cname
+#       - name: Deploy Github
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}  # 这里不用动, 默认就好
+#           publish_dir: ./public  # 注意是hugo的public文件夹
+#           cname: www.okrust.com # cname
           
-      #- name: Deploy to VPS
-      #  env: 
-      #    RSYNC_PWD: ${{ secrets.RSYNC_PASSWORD }}
-      #  run: |
-      #    echo $RSYNC_PWD > rsync.pwd
-      #    sudo chmod 600 rsync.pwd
-      #    rsync -avP --delete public/*   --password-file=rsync.pwd myblog@okrust.com::blog
+#       #- name: Deploy to VPS
+#       #  env: 
+#       #    RSYNC_PWD: ${{ secrets.RSYNC_PASSWORD }}
+#       #  run: |
+#       #    echo $RSYNC_PWD > rsync.pwd
+#       #    sudo chmod 600 rsync.pwd
+#       #    rsync -avP --delete public/*   --password-file=rsync.pwd myblog@okrust.com::blog
 
-      - name: Upload Files to Server
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.BLOG_HOST }}
-          username: ${{ secrets.BLOG_USERNAME }}
-          port: ${{ secrets.BLOG_PORT }}
-          key: ${{ secrets.BLOG_KEY }}
-          source: public/*
-          target: ${{ secrets.BLOG_DESC }}
+#       - name: Upload Files to Server
+#         uses: appleboy/scp-action@v0.1.4
+#         with:
+#           host: ${{ secrets.BLOG_HOST }}
+#           username: ${{ secrets.BLOG_USERNAME }}
+#           port: ${{ secrets.BLOG_PORT }}
+#           key: ${{ secrets.BLOG_KEY }}
+#           source: public/*
+#           target: ${{ secrets.BLOG_DESC }}
