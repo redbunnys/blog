@@ -5,7 +5,7 @@ description: "archLinux 安装教程"
 featured_image: "https://w.wallhaven.cc/full/g7/wallhaven-g72k6d.png"
 comment : false
 hidden: false
-draft: true
+draft: false
 tags: ["arch","linux"]
 Categories: "linux"
 ---
