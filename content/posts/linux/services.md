@@ -1,6 +1,6 @@
 ---
 title: "linux service编写"
-date: 2023-08-10T12:16:10+08:00
+date: 2024-08-10T12:16:10+08:00
 draft: false
 description: "linux service "
 featured_image: "https://w.wallhaven.cc/full/nz/wallhaven-nzmeog.jpg"

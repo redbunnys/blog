@@ -1,6 +1,6 @@
 ---
 title: "linux权限快速了解"
-date: 2023-08-07T15:16:10+08:00
+date: 2024-08-07T15:16:10+08:00
 draft: false
 description: "linux权限快速了解"
 featured_image: "https://w.wallhaven.cc/full/l8/wallhaven-l83o92.jpg"
