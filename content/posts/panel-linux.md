@@ -1,6 +1,6 @@
 ---
 title: " Linux 服务器 Web 面板"
-date: 2026-6-22T15:00:30+08:00
+date: 2026-06-22T12:07:00+08:00
 description: "Linux面板"
 featured_image: "https://w.wallhaven.cc/full/3q/wallhaven-3qrdr6.jpg"
 comment : true
